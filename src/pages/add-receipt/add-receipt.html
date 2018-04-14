@@ -1,0 +1,120 @@
+<!--
+  Generated template for the AddReceiptPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>add-receipt</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+</ion-content> -->
+
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only>
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      Add Receipt
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page1">
+  <!-- <img src="assets/imgs/target.png" style="display:block;width:300px;height:auto;margin-left:auto;margin-right:auto; padding-bottom: 20px" /> -->
+  <img src="{{recentlyTakenPhoto}}">
+  <form id="addReceipt-form6">
+
+    <ion-item id="addReceipt-input6">
+      <ion-label> Store</ion-label>
+      <ion-input 
+          type="text" 
+          placeholder="Store Name" 
+          name="storeName" 
+          [(ngModel)]= "myReciept.store"
+      >
+      </ion-input>
+    </ion-item>
+
+
+    <ion-item id="addReceipt-input7">
+      <ion-label> Date  
+        <ion-datetime displayFormat="MM/DD/YYYY" name="date" [(ngModel)]="myReciept.day"></ion-datetime>
+      </ion-label>
+    </ion-item>
+
+    <ion-item id="addReceipt-input8">
+      <ion-label> $ </ion-label>
+      <ion-input 
+        type="number" 
+        placeholder="Total Amount" 
+        name="amount"
+        [(ngModel)]= "myReciept.amount"
+      >
+    </ion-input>
+    </ion-item>
+
+    <ion-item id="addReceipt-select1">
+      <ion-label>
+        Categories
+      </ion-label>
+      <ion-select name="categories" [(ngModel)]="myReciept.category">
+        <ion-option value="shopping">
+          Shopping & Entertainment
+        </ion-option>
+        <ion-option value="groceries">
+          Groceries
+        </ion-option>
+        <ion-option value="restaurants">
+          Restaurants
+        </ion-option>
+        <ion-option value="utilities">
+          Utilities
+        </ion-option>
+        <ion-option value="misc">
+          Misc.
+        </ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item id="addReceipt-input9">
+      <ion-label> Tags </ion-label>
+      <ion-input 
+        type="text" 
+        placeholder=""
+        name="tag"
+        [(ngModel)]= "myReciept.tag"
+      >
+      </ion-input>
+    </ion-item>
+
+  </form>
+  <form id="addReceipt-form8">
+    <ion-item id="addReceipt-toggle7">
+      <ion-label>
+        Shared with: 
+      </ion-label>
+      <ion-toggle color="positive" checked="false" name="isSharedToggle" [(ngModel)]="isShared"></ion-toggle>
+    </ion-item>
+  </form>
+  <div id="addReceipt-container2">
+    <form id="addReceipt-form7">
+      <button [disabled]=isEnabled id="addReceipt-button2" ion-button color="positive" block (click)="save();">
+        Save
+      </button>
+    </form>
+  </div>
+</ion-content>

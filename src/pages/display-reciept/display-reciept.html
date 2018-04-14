@@ -1,0 +1,78 @@
+<!--
+  Generated template for the DisplayRecieptPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>display-reciept</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content padding>
+  <ion-grid style="text-align: center; "  >
+    <ion-row row-center>
+      <ion-item style="text-align: center">
+        <img src="assets/imgs/target.png" style="width: 20%; height: 20%">
+      </ion-item>
+    </ion-row>
+    <ion-row style="background-color: #BCF0F3; height: 45px">
+      <ion-col col-6>
+          <strong style="justify-content: center;"> Date</strong>
+        </ion-col>
+        <ion-col col-6>
+            <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="selectedReciept.day"></ion-datetime>
+        </ion-col>
+    </ion-row>
+
+    <ion-row style="background-color: #C9FBFF; height: 45px">
+        <ion-col col-6>
+            <strong> Amount </strong>
+          </ion-col>
+          <ion-col col-6>
+              ${{selectedReciept.amount}}
+          </ion-col>
+    </ion-row>
+
+    <ion-row style="background-color: #BCF0F3; height: 45px">
+        <ion-col col-6>
+            <strong> Store Name </strong>
+          </ion-col>
+          <ion-col col-6>
+              {{selectedReciept.store}}
+          </ion-col>
+    </ion-row>
+
+    <ion-row style="background-color: #C9FBFF; height: 45px">
+        <ion-col col-6>
+            <strong> Description </strong>
+          </ion-col>
+          <ion-col col-6>
+              {{selectedReciept.category}}
+          </ion-col>
+    </ion-row>
+
+    <ion-row style="background-color: #BCF0F3; height: 45px">
+        <ion-col col-6>
+            <strong> Tags </strong>
+          </ion-col>
+          <ion-col col-6>
+              {{selectedReciept.tag}}
+          </ion-col>
+    </ion-row>
+
+    <ion-row style="background-color: #C9FBFF; height: 45px" *ngIf="selectedReciept.sharedWith != ''">
+        <ion-col col-6>
+            <strong> shared with:  </strong>
+          </ion-col>
+          <ion-col col-6>
+              {{selectedReciept.sharedWith}}
+          </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

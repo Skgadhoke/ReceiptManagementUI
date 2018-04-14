@@ -1,8 +1,9 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="contact" color="primary"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -12,20 +13,32 @@
     <ion-tab [root]="shared"></ion-tab>
   </ion-tabs> -->
   
-  <h2 style="font-family: Comic Sans MS, cursive, sans-serif"> Hello </h2>
+  <h2 style="font-family: Comic Sans MS, cursive, sans-serif; color: #43c8bb"> Hello, {{currentUser.username}}</h2>
   <ion-card>
       <ion-card-content>
           <canvas #doughnutCanvas></canvas>
         </ion-card-content>
       </ion-card>
+      <ion-item text-center>
+          <button ion-button full style="background:#d0e0e3; color:black; font-size:15px; height:45px" (click)=takePicture()>Add Reciept &nbsp;
+            <ion-icon name="add"></ion-icon></button>
+      </ion-item>
+      <ion-item text-center>
+          <button ion-button full style="background:#d0e0e3; color:black; font-size:15px; height:45px" (click)=viewHistory()>View History &nbsp;
+            <ion-icon name="paper"></ion-icon></button>
+      </ion-item>
+      <ion-item  text-center>
+          <button ion-button full style="background:#d0e0e3; color:black; font-size:15px; height:45px" (click)=viewActivity()>View Activity &nbsp;
+            <ion-icon name="briefcase"></ion-icon></button>
+      </ion-item>
+      <ion-item text-center>
+          <button ion-button full style="background:#d0e0e3; color:black; font-size:15px; height:45px" >Set Reminder &nbsp;
+            <ion-icon name="alarm"></ion-icon></button>
+      </ion-item>
 
-        <ion-item text-center>
-            <button ion-button color="dark" (click)=viewHistory()>View History</button>
-        </ion-item>
-        <ion-item  text-center>
-            <button ion-button color="dark" >View Activity</button>
-        </ion-item>
-        <ion-item text-center>
-            <button ion-button color="dark" >Set Reminder</button>
-        </ion-item>
+        <!-- <ion-fab right bottom style="padding-right:15px; padding-bottom: 15px">
+          <button ion-fab style="background-color: #43c8bb; height:80px; width:80px"  (click)=takePicture()>
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-fab> -->
 </ion-content>

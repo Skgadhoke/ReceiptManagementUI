@@ -1,9 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { HistoryPage } from '../history/history';
+import { AddReceiptPage } from '../add-receipt/add-receipt';
+import { ViewActivityPage } from '../view-activity/view-activity';
 import { Chart } from 'chart.js';
+import  { user } from '../signup/user';
 
 import { reciept } from '../history/reciept';
+
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 
 @Component({
@@ -15,26 +21,19 @@ export class HomePage {
   doughnutChart: Chart;
   pieChartdataArray=[];
   pielabelsArray=[];
+  currentUser: any;
   // reciepts: any;
 
-  constructor(public navCtrl: NavController ) {
+  image: any;
+  base64Image: any;
+  // recentlyTakenPhoto: any;
 
-    // let date1 = new Date(2018, 7, 3);
-    // let date2 = new Date(2018, 7, 5);
-
-    // let reciept1 = new reciept(date1.toISOString(), 'target', 14.41);
-    // let reciept2 = new reciept(date2.toISOString(), 'target', 13.43);
-    // this.reciepts = [];
-    // this.reciepts.push(reciept1);
-    // this.reciepts.push(reciept2);
+  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private diagnostic: Diagnostic) {
+    // this.currentUser = this.navParams.get('newUser');    // uncomment when sign up or login is the root page
+    this.currentUser = new user('test1', 'test1@gmail.com', 'test', '');
   }
 
   createChart () {
-    // var myDoughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
-    //   type: 'doughnut',
-    //   data: [10, 20, 30],//this.reciepts,
-    //   options: { responsive: true}
-    // });
 
     var config = {
       type: 'doughnut',
@@ -49,6 +48,7 @@ export class HomePage {
           legend: {
               position: 'top',
           },
+
           tooltips: {
               callbacks: {
                   // label: function(tooltipItem, data) {
@@ -68,30 +68,87 @@ export class HomePage {
 
   chartTest() {
     new Chart(this.doughnutCanvas.nativeElement, {
-      type: 'pie',
+      type: 'doughnut',
       data: {
-        labels: ["Utilies", "Store", "Europe", "Restraurants", "Misc."],
+        labels: ["Utilies", "Store", "Restraurants", "Misc."],
         datasets: [{
           label: "Population (millions)",
-          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-          data: [2478,5267,734,784,433]
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
+          data: [1478,267,734,100]
         }]
       },
       options: {
         title: {
           display: true,
-          text: 'Break down'
+          text: 'April 2018'
         }
       }
   });
-  }
 
+Chart.pluginService.register({
+  beforeDraw: function(chart) {
+    var width = chart.chart.width,
+        height = chart.chart.height,
+        ctx = chart.chart.ctx;
+
+    ctx.restore();
+    var fontSize = (height / 150).toFixed(2);
+    ctx.font = fontSize + "em sans-serif";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "#CC3D3D";
+
+    var text = "Total" ,
+        textX = Math.round((width - ctx.measureText(text).width) / 2),
+        textY = height / 2 ;
+
+    ctx.fillText(text, textX, textY);
+
+    var text2 = "$ 2,579" ,
+        textX2 = Math.round((width - ctx.measureText(text2).width) / 2),
+        textY2 = height /2 + height / 11;
+
+    ctx.fillText(text2, textX2, textY2);
+
+    ctx.save();
+  }
+});
+  }
 
 
   viewHistory () {
     // this.navCtrl.setRoot(HistoryPage);
     this.navCtrl.push(HistoryPage);
-    
   }
 
+  addReceipt(){
+    this.navCtrl.push(AddReceiptPage);
+  }
+
+  viewActivity(){
+    this.navCtrl.push(ViewActivityPage);
+  }
+
+  takePicture () {
+    const options: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    
+    // must ask the user for permissions
+    this.diagnostic.isCameraAvailable().then(successCallback => {
+      this.camera.getPicture(options).then((imageData) => {
+        // imageData is either a base64 encoded string or a file URI
+        // If it's base64:
+        let recentlyTakenPhoto  = 'data:image/jpeg;base64,' + imageData;
+        this.navCtrl.push(AddReceiptPage, {recentlyTakenPhoto: recentlyTakenPhoto});
+       }, (err) => {
+        alert('something went wrong');
+       });
+    }).catch((errorCallback)=> {
+      alert('camera is not ready');
+      this.navCtrl.push(AddReceiptPage);
+    });
+  }
 }

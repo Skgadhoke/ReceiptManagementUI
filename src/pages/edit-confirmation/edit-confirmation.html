@@ -1,0 +1,59 @@
+<!--
+  Generated template for the EditConfirmationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Confirmation</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+  <img src="{{recentlyTakenPhoto}}" style="display:block;width:300px;height:auto;margin-left:auto;margin-right:auto; padding-bottom: 20px" />
+
+  <form id="addReceipt-form6">
+    <ion-item id="addReceipt-input6">
+      <ion-label>
+        Store &nbsp;&nbsp;  {{ myReciept.store }} <!-- Target -->
+      </ion-label>
+  
+    </ion-item>
+    <ion-item id="addReceipt-input7">
+      <ion-label>
+        Date&nbsp;&nbsp; <ion-datetime displayFormat="MM/DD/YYYY" name="date" [(ngModel)]="myReciept.day"></ion-datetime>
+      </ion-label>
+    </ion-item>
+    <ion-item id="addReceipt-input8">
+      <ion-label>
+        $ &nbsp;&nbsp; {{ myReciept.amount }} 
+      </ion-label>
+    </ion-item>
+    <ion-item id="addReceipt-select1">
+      <ion-label>
+        Categories&nbsp;&nbsp; {{ myReciept.category }} 
+      </ion-label>
+    </ion-item>
+    <ion-item id="addReceipt-input9">
+      <ion-label>
+        Tags&nbsp;&nbsp;{{ myReciept.tag }}
+      </ion-label>
+    </ion-item>
+  </form>
+  <form id="addReceipt-form8">
+    <ion-item id="addReceipt-toggle7">
+      <ion-label>
+        Shared?
+      </ion-label>
+      <ion-toggle color="positive" checked="true"></ion-toggle>
+    </ion-item>
+  </form>
+  <button ion-button >Edit</button>
+  <button ion-button (click)=viewHistory()>Ok</button>
+</ion-content>

@@ -1,33 +1,14 @@
-<!--
-  Generated template for the HistoryPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>History</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="contact" color="primary"></ion-icon>
+      </button>
+      <ion-title>History</ion-title>
+    </ion-navbar>
+  </ion-header>
 
 <ion-content padding>
-  <h1> History Page </h1>
-
-  <ion-segment color="dark" [(ngModel)]="historyToggle" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="personal">
-          Personal
-        <ion-icon name="person"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button value="shared">
-        Shared 
-        <ion-icon name="people"></ion-icon>
-      </ion-segment-button>
-  </ion-segment>
-
-  <!-- filtering thing -->
   <ion-item style="text-align: center">
       <ion-icon>Filtering Options: </ion-icon>
       <ion-icon (click)="filterByCal()" name="calendar" padding-left></ion-icon>
@@ -35,41 +16,26 @@
       <ion-icon name="create" padding-left></ion-icon>
   </ion-item>
 
-  <ion-item>
+  <!-- <ion-item>
     <img src="">
-  </ion-item>
+  </ion-item> -->
 
   <!-- This has to do with adding the cards -->
-  <ion-item *ngIf="historyToggle == 'personal'; else shared">
-      <ion-card> 
-          <ion-card-content style="text-align: center">
-              {{reciepts[0].day}} ${{reciepts[0].amount}}
-              <!-- 03/09/2018 $14.40 -->
-              <!-- <ion-item>
-                <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="reciept1.day"></ion-datetime>
-                <ion-label color="dark">${{reciept1.amount}}</ion-label>
-              </ion-item> -->
-            </ion-card-content>
-        </ion-card>
-        <ion-card> 
-            <ion-card-content style="text-align: center">
-                {{reciepts[1].day}} ${{reciepts[1].amount}}
-              </ion-card-content>
-        </ion-card>
-  </ion-item>
-  <ng-template #shared>
-    <ion-item>
-        <ion-card> 
-            <ion-card-content>
-                03/07/2018 $14.40
-              </ion-card-content>
-          </ion-card>
-          <ion-card> 
-              <ion-card-content>
-                  03/07/2018 $14.40
-                </ion-card-content>
-          </ion-card>
-    </ion-item>
-  </ng-template>
+
+  <ion-list style="text-align: center" *ngFor="let r of reciepts">
+    <!-- <ion-item style="text-align: center" *ngFor="let r of reciepts"> -->
+        <button ion-button full style="background:#BCDFE5; color:black; font-size:15px; height:45px" (click)=displayReciept(r)>
+            <p style="color: black" *ngIf="r.sharedWith == ''; else shared"> 
+              <ion-icon name="person"></ion-icon>
+                {{r.recieptID}} &nbsp; {{r.store}} &nbsp;  ${{r.amount}}
+            </p>
+            <ng-template #shared>
+                <ion-icon name="people"></ion-icon>
+                {{r.recieptID}} &nbsp;  {{r.store}} &nbsp;  ${{r.amount}}
+            </ng-template>
+          </button>
+    <!-- </ion-item> -->
+  </ion-list>
     
 </ion-content>
+

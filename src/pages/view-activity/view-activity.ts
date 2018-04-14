@@ -2,23 +2,24 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the SharedPage page.
+ * Generated class for the ViewActivityPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
+@IonicPage()
 @Component({
-  selector: 'page-shared',
-  templateUrl: 'shared.html',
+  selector: 'page-view-activity',
+  templateUrl: 'view-activity.html',
 })
-export class SharedPage {
+export class ViewActivityPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SharedPage');
+    console.log('ionViewDidLoad ViewActivityPage');
   }
 
 }

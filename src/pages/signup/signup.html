@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="contact" color="primary"></ion-icon>
+      </button>
+      <ion-title>Sign Up</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+<ion-content padding>
+    <form (ngSubmit)="onSignUp()">
+        <ion-item> 
+           <ion-input 
+               type="text" 
+               [(ngModel)] = "newUser.username"
+               (input)="userInput()" 
+               name = "username"
+               placeholder="username"
+           >
+           </ion-input>
+         </ion-item>
+
+         <ion-item>
+            <ion-input 
+                type="email" 
+                [(ngModel)] = "newUser.email"
+                (input)="userInput()" 
+                name = "email"
+                placeholder="email"
+            >
+            </ion-input>
+          </ion-item> 
+   
+        <ion-item>
+           <ion-input 
+               type="password" 
+               [(ngModel)] = "newUser.password"
+               (input)="userInput()" 
+               name = "password"
+               placeholder="password"
+           >
+           </ion-input>
+         </ion-item>    
+   
+       <button [disabled]="!isenabled"ion-button color="dark" type="submit" block>
+           Sign In
+       </button>
+      </form>
+</ion-content>
