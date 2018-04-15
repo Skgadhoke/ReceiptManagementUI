@@ -125,7 +125,7 @@ export class backendProvider {
     options = new RequestOptions({ headers: headers });
     body = { username: selectedUser.username, password: selectedUser.password};
     
-    return this.http.post(this.authUser, body, options)
+    return this.http.post(this.authUserUri, body, options)
           .map(this.handleResponse)
           .catch(this.handleError);
   }
