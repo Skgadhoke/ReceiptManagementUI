@@ -14,6 +14,9 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 import { CurrentUser } from '../../providers/current-user';
 import { backendProvider } from '../../providers/backend-service';
 import { ToastController } from 'ionic-angular';
+import { ProfilePage } from '../profile/profile';
+import { InboxPage } from '../inbox/inbox';
+
 
 @Component({
 	selector: 'page-home',
@@ -29,11 +32,25 @@ export class HomePage {
 
 	image: any;
 	base64Image: any;
+
+	pages: Array<{title: string, component: any}>;
 	// recentlyTakenPhoto: any;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private diagnostic: Diagnostic, public currentuser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController) {
-		this.currUser = this.currentuser.getUser(); //new user('test1', 'test1@gmail.com', 'test', '');
+		this.currUser = this.currentuser.getUser();
+
+		this.pages = [
+			{ title: 'Profile', component: ProfilePage },
+			{ title: 'Home', component: HomePage },
+			{ title: 'Inbox', component: InboxPage }
+		];
 	}
+
+	openPage(page) {
+		// Reset the content nav to have just this page
+		// we wouldn't want the back button to show in this scenario
+		this.navCtrl.setRoot(page.component);
+	  }
 
 	createChart () {
 		var config = {
