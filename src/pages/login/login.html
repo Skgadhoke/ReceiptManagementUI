@@ -8,7 +8,32 @@
   </ion-header>
   
 
-
-<ion-content padding>
-
-</ion-content>
+  <ion-content padding>
+      <form (ngSubmit)="onSignUp()">
+          <ion-item> 
+             <ion-input 
+                 type="text" 
+                 [(ngModel)] = "currUser.username"
+                 (input)="userInput()" 
+                 name = "username"
+                 placeholder="username"
+             >
+             </ion-input>
+            </ion-item>
+     
+          <ion-item>
+             <ion-input 
+                 type="password" 
+                 [(ngModel)] = "currUser.password"
+                 (input)="userInput()" 
+                 name = "password"
+                 placeholder="password"
+             >
+             </ion-input>
+           </ion-item>    
+     
+         <button [disabled]="!isenabled"ion-button color="dark" type="submit" block>
+             Sign In
+         </button>
+        </form>
+  </ion-content>

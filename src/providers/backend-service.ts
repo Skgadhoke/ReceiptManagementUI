@@ -9,15 +9,23 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class backendProvider {
-  signUpUri = 'https://cs422.azurewebsites.net/api/NewUser?code=IxiS83qkqmtx7nPg6Ye2mic5s3ir9TUTPt9siwj8Hjqpt/426CVgjA==';
-  newRecieptUri = 'https://cs422.azurewebsites.net/api/postReciept?code=/L98K2csHuyxIPkz6egB0LmACFiR287szgVVZTzMoQRxVk/ViSHUqA=='
-  getRecieptsUri = 'https://cs422.azurewebsites.net/api/getReciepts?code=aGjRTHnwO1S8ck/coagl2HIAXT6PNdVlQJeTxafoFhiC3onLUEJ8aA=='
-  // getRecieptsUri = ''
+	signUpUri = 'https://cs422.azurewebsites.net/api/NewUser?code=IxiS83qkqmtx7nPg6Ye2mic5s3ir9TUTPt9siwj8Hjqpt/426CVgjA==';
+	newRecieptUri = 'https://cs422.azurewebsites.net/api/postReciept?code=/L98K2csHuyxIPkz6egB0LmACFiR287szgVVZTzMoQRxVk/ViSHUqA=='
+	newPhotoUri ='https://cs422.azurewebsites.net/api/postImage?code=ETbAtMwgRxOGyufsTob8BFj9vabc8/P12gf4H6gnlre/grGoNoqSMw==';
+
+	getRecieptsUri = 'https://cs422.azurewebsites.net/api/getReciepts?code=aGjRTHnwO1S8ck/coagl2HIAXT6PNdVlQJeTxafoFhiC3onLUEJ8aA=='
+	getPhotoUri = 'https://cs422.azurewebsites.net/api/getImage?code=vju7hwo1wqatI1MtzZ31yDykvTRbi2Hee6C/9VIsALSFMUaMxWBbcA==';
+
+	authUserUri = '';
+	// getRecieptsUri = '';
+  
 
   constructor(public http: Http) {
     console.log('Hello LoginProvider Provider');
   }
 
+ 
+  // POST APIs
   postNewUser(usr: any): Observable<any> {
     let headers, options, body;
     headers = new Headers({ 
@@ -32,9 +40,9 @@ export class backendProvider {
           .catch(this.handleError);
   }
 
-  // POST APIs
+
   createNewReciept(username: any, reciept: any, sharedUser: any): Observable<any> {
-    alert('shared with: ' + sharedUser);
+    // alert('shared with: ' + sharedUser);
     let headers, options, body;
     headers = new Headers({ 
         'Content-Type': 'application/json',
@@ -53,9 +61,25 @@ export class backendProvider {
         sharedwith: sharedUser
     };
     return this.http.post(this.newRecieptUri, body, options)
-          .map(this.handleResponse)
-          .catch(this.handleError);
+		.map(this.handleResponse)
+		.catch(this.handleError);
   }
+
+
+  newPhoto(recieptID: any, photo: any): Observable<any> {
+    let headers, options, body;
+    headers = new Headers({ 
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache',
+        'Authorization': 'Basic'
+    });
+    options = new RequestOptions({ headers: headers });
+    body = { recieptID: recieptID, photo: photo };
+    return this.http.post(this.newPhotoUri, body, options)
+		.map(this.handleResponse)
+		.catch(this.handleError);
+  }
+
 
   // GET APIs
   getReciepts(username: any): Observable<any> {
@@ -74,6 +98,39 @@ export class backendProvider {
           .catch(this.handleError);
   }
 
+  getPhoto(recieptID: any): Observable<any> {
+    let headers, options, body;
+    headers = new Headers({ 
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache',
+        'Authorization': 'Basic'
+      });
+    
+    options = new RequestOptions({ headers: headers });
+    body = { recieptID: recieptID};
+    
+    return this.http.post(this.getPhotoUri, body, options)
+          .map(this.handleResponse)
+          .catch(this.handleError);
+  }
+
+  authUser(selectedUser: any): Observable<any> {
+    let headers, options, body;
+    headers = new Headers({ 
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache',
+        'Authorization': 'Basic'
+      });
+    
+    options = new RequestOptions({ headers: headers });
+    body = { username: selectedUser.username, password: selectedUser.password};
+    
+    return this.http.post(this.authUser, body, options)
+          .map(this.handleResponse)
+          .catch(this.handleError);
+  }
+
+  
 
   // error handling stuff
   private handleResponse (res: Response) {

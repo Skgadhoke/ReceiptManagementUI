@@ -15,13 +15,17 @@
 
 
 <ion-content padding>
+
+    <h1> Reciept ID: {{ selectedReciept.recieptID }}</h1>
+
   <ion-grid style="text-align: center; "  >
     <ion-row row-center>
       <ion-item style="text-align: center">
-        <img src="assets/imgs/target.png" style="width: 20%; height: 20%">
+        <img src="{{recentlyTakenPhoto}}">
       </ion-item>
     </ion-row>
-    <ion-row style="background-color: #BCF0F3; height: 45px">
+
+    <ion-row justify-content-center align-items-center  style="background-color: #BCF0F3; height: 45px">
       <ion-col col-6>
           <strong style="justify-content: center;"> Date</strong>
         </ion-col>
@@ -30,7 +34,7 @@
         </ion-col>
     </ion-row>
 
-    <ion-row style="background-color: #C9FBFF; height: 45px">
+    <ion-row justify-content-center align-items-center style="background-color: #C9FBFF; height: 45px">
         <ion-col col-6>
             <strong> Amount </strong>
           </ion-col>
@@ -39,7 +43,7 @@
           </ion-col>
     </ion-row>
 
-    <ion-row style="background-color: #BCF0F3; height: 45px">
+    <ion-row justify-content-center align-items-center style="background-color: #BCF0F3; height: 45px">
         <ion-col col-6>
             <strong> Store Name </strong>
           </ion-col>
@@ -48,7 +52,7 @@
           </ion-col>
     </ion-row>
 
-    <ion-row style="background-color: #C9FBFF; height: 45px">
+    <ion-row justify-content-center align-items-center style="background-color: #C9FBFF; height: 45px">
         <ion-col col-6>
             <strong> Description </strong>
           </ion-col>
@@ -57,7 +61,7 @@
           </ion-col>
     </ion-row>
 
-    <ion-row style="background-color: #BCF0F3; height: 45px">
+    <ion-row justify-content-center align-items-center style="background-color: #BCF0F3; height: 45px">
         <ion-col col-6>
             <strong> Tags </strong>
           </ion-col>
@@ -66,7 +70,7 @@
           </ion-col>
     </ion-row>
 
-    <ion-row style="background-color: #C9FBFF; height: 45px" *ngIf="selectedReciept.sharedWith != ''">
+    <ion-row justify-content-center align-items-center style="background-color: #C9FBFF; height: 45px" *ngIf="selectedReciept.sharedWith != ''">
         <ion-col col-6>
             <strong> shared with:  </strong>
           </ion-col>

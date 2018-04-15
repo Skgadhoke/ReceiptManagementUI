@@ -32,8 +32,10 @@ export class HistoryPage {
 		(
 			data => {
 				// need to add toastr for successful sign up
-				console.log('** success added reciept to db');
+				// console.log(data.reciepts);
 				
+				// alert(data.reciepts[0].recieptID);
+
 				for (let d in data.reciepts)
 					this.reciepts.push (
 						new reciept (
@@ -46,6 +48,8 @@ export class HistoryPage {
 							data.reciepts[d].sharedWith
 						)
 					);
+
+
 			},
 			error =>  { 
 		// need to add toastr for failure sign up

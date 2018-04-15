@@ -1,6 +1,6 @@
 export class reciept { 
     constructor (
-		public recieptID?: number,
+		public recieptID?: any,
 		public day?: any,
 		public store?: string, 
 		public amount?: number, 

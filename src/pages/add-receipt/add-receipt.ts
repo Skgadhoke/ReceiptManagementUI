@@ -42,16 +42,25 @@ export class AddReceiptPage {
         this.backend.createNewReciept (this.currUser, this.myReciept, sharedUser).subscribe
         (
             data => {
-				// need to add toastr for successful sign up
-				console.log('** success added reciept to db');
-				this.presentToast('Successfully added reciept', 'toastrSuccess');
-				this.navCtrl.push(HistoryPage);
+                console.log(data);
+                // need to add toastr for successful sign up
+                console.log('** success added reciept to db');
+
+                this.backend.newPhoto (data, this.recentlyTakenPhoto).subscribe (
+                    succ => {
+                        this.presentToast('Successfully added reciept', 'toastrSuccess');
+                    }, 
+                    err => {
+                        this.presentToast('Error: Could not add reciept', 'toastrFail');
+                    }
+                );
+                this.navCtrl.push(HistoryPage);
             },
             error =>  { 
-				// need to add toastr for failure sign up
-				this.presentToast('Error: Could not add reciept', 'toastrFail');
-				console.log('Error: failed to add reciept to db');
-				console.log(error);
+                // need to add toastr for failure sign up
+                this.presentToast('Error: Could not add reciept', 'toastrFail');
+                console.log('Error: failed to add reciept to db');
+                console.log(error);
             }
         );
 	}

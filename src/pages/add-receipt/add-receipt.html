@@ -112,7 +112,12 @@
   </form>
   <div id="addReceipt-container2">
     <form id="addReceipt-form7">
-      <button [disabled]=isEnabled id="addReceipt-button2" ion-button color="positive" block (click)="save();">
+      <button [disabled]=isEnabled 
+          id="addReceipt-button2" 
+          ion-button color="positive" 
+          block 
+          style="background:#BCDFE5; color:black; font-size:15px; height:45px"
+          (click)="save();">
         Save
       </button>
     </form>
