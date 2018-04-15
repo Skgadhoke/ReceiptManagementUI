@@ -4,12 +4,12 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-// import { ProfilePage } from '../pages/profile/profile';
-// import { AddReceiptPage } from '../pages/add-receipt/add-receipt';
+import { ProfilePage } from '../pages/profile/profile';
+import { AddReceiptPage } from '../pages/add-receipt/add-receipt';
 
 // import { SignupPage } from '../pages/signup/signup'
 import { LoginPage } from '../pages/login/login'
-// import { InboxPage } from '../pages/inbox/inbox';
+import { InboxPage } from '../pages/inbox/inbox';
 
 
 @Component({
@@ -29,7 +29,9 @@ export class MyApp {
     // this.pages = [
     //   { title: 'Profile', component: ProfilePage },
     //   { title: 'Home', component: HomePage },
-    //   { title: 'Inbox', component: InboxPage }
+    //   { title: 'Inbox', component: InboxPage },
+    //   // { title: 'Sign Up', component: SignupPage },
+    //   // { title: 'Login', component: LoginPage },
     // ];
 
   }
@@ -43,10 +45,10 @@ export class MyApp {
     });
   }
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
-  }
+  // openPage(page) {
+  //   // Reset the content nav to have just this page
+  //   // we wouldn't want the back button to show in this scenario
+  //   this.nav.setRoot(page.component);
+  // }
 
 }

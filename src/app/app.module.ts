@@ -15,6 +15,7 @@ import { EditConfirmationPage } from '../pages/edit-confirmation/edit-confirmati
 import { SignupPage } from '../pages/signup/signup'
 import { LoginPage } from '../pages/login/login'
 import { InboxPage } from '../pages/inbox/inbox'
+import { SideMenuPage } from '../pages/side-menu/side-menu';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -30,6 +31,8 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { CurrentUser } from '../providers/current-user';
 
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -43,7 +46,8 @@ import { CurrentUser } from '../providers/current-user';
     EditConfirmationPage,
     SignupPage,
     LoginPage,
-    InboxPage
+    InboxPage,
+    SideMenuPage
   ],
   imports: [
     BrowserModule,
@@ -64,7 +68,8 @@ import { CurrentUser } from '../providers/current-user';
     EditConfirmationPage,
     SignupPage,
     LoginPage,
-    InboxPage
+    InboxPage,
+    SideMenuPage
   ],
   providers: [
     StatusBar,

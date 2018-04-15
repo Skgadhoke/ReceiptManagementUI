@@ -5,9 +5,8 @@ import { backendProvider } from '../../providers/backend-service';
 import { user } from '../signup/user'
 import { ToastController } from 'ionic-angular';
 import { HomePage } from '../home/home';
-
+import { SideMenuPage } from '../side-menu/side-menu';
 import { SignupPage } from '../signup/signup'
-
 import { CurrentUser } from '../../providers/current-user';
 
 @Component({
@@ -45,7 +44,7 @@ export class LoginPage {
 
 					this.presentToast('Successfully logged in', 'toastrSuccess');
 					// this.navCtrl.push(HomePage);
-					this.navCtrl.setRoot(HomePage);
+					this.navCtrl.push(SideMenuPage);
 				} else {
 					this.presentToast('Incorrect credentials please try again', 'toastrFail');
 				}
