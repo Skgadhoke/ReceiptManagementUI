@@ -60,5 +60,20 @@ export class AddReceiptPage {
                 console.log(error);
             }
         );
-	}
+    }
+    
+    private presentToast(message: any, toastCss: any) {
+		let toast = this.toastCtrl.create({
+		  message: message,
+		  duration: 1500,
+		  position: 'top',
+		  cssClass: toastCss
+		});
+	  
+		toast.onDidDismiss(() => {
+		  console.log('Dismissed toast');
+		});
+	  
+		toast.present();
+	  }
 }

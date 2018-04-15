@@ -40,7 +40,7 @@ export class backendProvider {
 			'Authorization': 'Basic'
 		});
 		options = new RequestOptions({ headers: headers });
-		body = { username: usr.username, email: usr.email, password: usr.password };
+		body = { username: usr.username, email: usr.email, password: usr.password, sharedWith: usr.sharedRecieptUser };
 		return this.http.post(this.signUpUri, body, options)
 			.map(this.handleResponse)
 			.catch(this.handleError);

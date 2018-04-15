@@ -18,7 +18,7 @@ import { InboxPage } from '../pages/inbox/inbox';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -30,8 +30,8 @@ export class MyApp {
       { title: 'Profile', component: ProfilePage },
       { title: 'Home', component: HomePage },
       { title: 'Inbox', component: InboxPage },
-      { title: 'Sign Up', component: SignupPage },
-      { title: 'Login', component: LoginPage },
+      // { title: 'Sign Up', component: SignupPage },
+      // { title: 'Login', component: LoginPage },
     ];
 
   }

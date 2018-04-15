@@ -11,27 +11,28 @@ import { reciept } from '../history/reciept';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Diagnostic } from '@ionic-native/diagnostic';
 
+import { CurrentUser } from '../../providers/current-user';
 import { backendProvider } from '../../providers/backend-service';
 import { ToastController } from 'ionic-angular';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+	selector: 'page-home',
+	templateUrl: 'home.html'
 })
 export class HomePage {
 	@ViewChild('doughnutCanvas') doughnutCanvas;
 	doughnutChart: Chart;
 	pieChartdataArray=[];
 	pielabelsArray=[];
-	currentUser: any;
+	currUser: any;
 	// reciepts: any;
 
 	image: any;
 	base64Image: any;
 	// recentlyTakenPhoto: any;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private diagnostic: Diagnostic, public backend: backendProvider, private toastCtrl: ToastController) {
-	this.currentUser = new user('test1', 'test1@gmail.com', 'test', '');
+	constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private diagnostic: Diagnostic, public currentuser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController) {
+		this.currUser = this.currentuser.getUser(); //new user('test1', 'test1@gmail.com', 'test', '');
 	}
 
 	createChart () {

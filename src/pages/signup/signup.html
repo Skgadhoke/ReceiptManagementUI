@@ -40,9 +40,26 @@
                placeholder="password"
            >
            </ion-input>
-         </ion-item>    
+         </ion-item>   
+         
+         <ion-item> 
+            <ion-input 
+                type="password" 
+                [(ngModel)] = "newUser.sharedRecieptUser"
+                (input)="userInput()" 
+                name = "shared"
+                placeholder="add person to share specific reciepts with "
+            >
+            </ion-input>
+          </ion-item> 
    
-       <button [disabled]="!isenabled"ion-button color="dark" type="submit" block>
+	   <button 
+	   		[disabled]="!isenabled"
+	   		style="background:#d0e0e3; color:black; font-size:15px; height:45px" 
+			ion-button 
+			color="dark" 
+			type="submit" block
+	   >
            Sign Up
        </button>
       </form>

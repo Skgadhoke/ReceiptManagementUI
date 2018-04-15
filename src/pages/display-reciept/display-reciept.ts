@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { reciept } from '../history/reciept';
 
 import { backendProvider } from '../../providers/backend-service';
+import { HomePage } from '../home/home';
 
 @Component({
   selector: 'page-display-reciept',
@@ -30,6 +31,6 @@ export class DisplayRecieptPage {
 	}
 
 	home () {
-		this.navCtrl.popToRoot();
+		this.navCtrl.setRoot(HomePage);
 	}
 }

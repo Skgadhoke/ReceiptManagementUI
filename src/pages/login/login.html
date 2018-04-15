@@ -32,8 +32,18 @@
              </ion-input>
            </ion-item>    
      
-         <button [disabled]="!isenabled"ion-button color="dark" type="submit" block>
-             Login
+		 <button 
+			[disabled]="!isenabled" 
+			style="background:#d0e0e3; color:black; font-size:15px; height:45px" 
+			ion-button 
+			color="dark" 
+			type="submit" block
+		>
+            Login
          </button>
-        </form>
+		</form>
+		
+		<button ion-button full style="background:#d0e0e3; color:black; font-size:15px; height:45px" (click)=signUp()>
+			or sign up
+		</button>
   </ion-content>

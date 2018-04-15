@@ -6,6 +6,8 @@ import { user } from '../signup/user'
 import { ToastController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 
+import { SignupPage } from '../signup/signup'
+
 import { CurrentUser } from '../../providers/current-user';
 
 @Component({
@@ -27,11 +29,17 @@ export class LoginPage {
 	login () {
 		this.backend.authUser (this.currUser).subscribe (
 			succ => {
-				if (succ != '-1') {
-					this.currUser.userID = succ;
-					// this.currUser.username = 'test';
-					// this.currUser.email = 'test@'; // will have to bring from result set
+				console.log(succ);
+				console.log(succ.users.length);
+				if (succ.users.length != 0) {
+					this.currUser.username = succ.users[0].username;
+					this.currUser.email = succ.users[0].email;
+					this.currUser.fcmID = succ.users[0].pushID;
+					this.currUser.sharedRecieptUser = succ.users[0].sharedWith;
+					this.currUser.userID = succ.users[0].userID;
+					console.log(this.currUser);
 
+					this.currUser.userID = succ;
 					this.currentuser.setUser(this.currUser);
 					// need to set user
 
@@ -68,5 +76,9 @@ export class LoginPage {
 		if (this.currUser.username != '' && this.currUser.password != '') {
 			this.isenabled = true;
 		}
+	}
+
+	signUp () {
+		this.navCtrl.push(SignupPage);
 	}
 }

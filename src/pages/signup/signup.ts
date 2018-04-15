@@ -4,15 +4,18 @@ import { backendProvider } from '../../providers/backend-service';
 import { user } from './user'
 import { HomePage } from '../home/home';
 
+import { CurrentUser } from '../../providers/current-user';
+import { ToastController } from 'ionic-angular';
+
 @Component({
-  selector: 'page-signup',
-  templateUrl: 'signup.html',
+	selector: 'page-signup',
+	templateUrl: 'signup.html',
 })
 
 export class SignupPage {
 	newUser: any;
 	isenabled: any;
-	constructor(public navCtrl: NavController, public navParams: NavParams, public backend: backendProvider) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public currentuser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController) {
 		this.newUser = new user('', '', '','');
 		this.isenabled = false;
 	}
@@ -25,15 +28,23 @@ export class SignupPage {
 		this.backend.postNewUser (this.newUser).subscribe
 		(
 			data => {
-			// need to add toastr for successful sign up
-			console.log('** success signed up');
-			this.newUser.password = ''; // remove password for security reasons
-			this.navCtrl.push(HomePage, {newUser: this.newUser});
+				if (data == '1') {
+					// need to add toastr for successful sign up
+					this.currentuser.setUser(this.newUser);
+					console.log('** success signed up');
+					console.log(this.newUser);				
+					this.newUser.password = ''; // remove password for security reasons
+					this.navCtrl.setRoot(HomePage);
+				} else {
+					this.presentToast('username already exists, please provide another username', 'toastrFail');
+				}
+
 			},
 			error =>  { 
-			// need to add toastr for failure sign up
-			console.log('Error in signing up');
-			console.log(error);
+				// need to add toastr for failure sign up
+				console.log('Error in signing up');
+				this.presentToast('Something went wrong when signing up', 'toastrFail');
+				console.log(error);
 			}
 		);
 	}
@@ -44,4 +55,19 @@ export class SignupPage {
 			this.isenabled = true;
 		}
 	}
+
+	private presentToast(message: any, toastCss: any) {
+		let toast = this.toastCtrl.create({
+		  message: message,
+		  duration: 1500,
+		  position: 'top',
+		  cssClass: toastCss
+		});
+	  
+		toast.onDidDismiss(() => {
+		  console.log('Dismissed toast');
+		});
+	  
+		toast.present();
+	  }
 }
