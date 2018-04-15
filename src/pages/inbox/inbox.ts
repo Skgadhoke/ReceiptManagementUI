@@ -24,6 +24,7 @@ export class InboxPage {
       console.log('ionViewDidLoad InboxPage');
         this.backend.getUnread (this.name).subscribe (
 			data => {
+				console.log(data);
 				for (let d in data.reciepts)
 					this.unReadReciepts.push (
 						new reciept (

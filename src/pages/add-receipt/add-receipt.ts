@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-// import { EditConfirmationPage } from '../edit-confirmation/edit-confirmation';
 import { HistoryPage } from '../history/history';
 import { reciept } from '../history/reciept';
 import { backendProvider } from '../../providers/backend-service';
 import { ToastController } from 'ionic-angular';
+import { CurrentUser } from '../../providers/current-user';
 
 @Component({
   selector: 'page-add-receipt',
@@ -14,15 +14,25 @@ export class AddReceiptPage {
     recentlyTakenPhoto: any;
     myReciept: reciept;
     isShared: any;
-    currUser: any;
+    currUsr: any;
     isEnabled: any;
+    isSharedToggleEnsabled: any;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public backend: backendProvider, private toastCtrl: ToastController) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public currentuser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController) {
 		this.recentlyTakenPhoto = this.navParams.get('recentlyTakenPhoto');
-		this.myReciept = new reciept();
+		this.myReciept = new reciept('', '', '', '', '', '', '');
 		this.isShared = false;
-		this.currUser = 'test';
-		this.isEnabled = false;
+        this.isEnabled = false;
+        this.currUsr = this.currentuser.getUser();
+
+        this.isSharedToggleEnsabled = false;
+
+        console.log(this.currUsr.sharedRecieptUser );
+
+        if (this.currUsr.sharedRecieptUser) {
+            console.log('shared toggle is true');
+            this.isSharedToggleEnsabled = true;
+        }
     }
 
     ionViewDidLoad() {
@@ -30,13 +40,8 @@ export class AddReceiptPage {
     }
 
     save() {
-        let sharedUser = '';
-        if (this.isShared) {
-			sharedUser = 'shared'; // as a temp
-        }
-
         // this.navCtrl.push(EditConfirmationPage, {myReciept: this.myReciept, recentlyTakenPhoto: this.recentlyTakenPhoto});
-        this.backend.createNewReciept (this.currUser, this.myReciept, sharedUser).subscribe
+        this.backend.createNewReciept (this.currUsr, this.myReciept).subscribe
         (
             data => {
                 console.log(data);
@@ -75,5 +80,11 @@ export class AddReceiptPage {
 		});
 	  
 		toast.present();
-	  }
+      }
+      
+      userInput () {
+          if (this.myReciept.store && this.myReciept.amount) {
+            this.isEnabled = true;
+          }
+      }
 }

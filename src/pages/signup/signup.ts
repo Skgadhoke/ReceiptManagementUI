@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { backendProvider } from '../../providers/backend-service';
 import { user } from './user'
-import { HomePage } from '../home/home';
+import { SideMenuPage } from '../side-menu/side-menu';
 
 import { CurrentUser } from '../../providers/current-user';
 import { ToastController } from 'ionic-angular';
@@ -30,11 +30,12 @@ export class SignupPage {
 			data => {
 				if (data == '1') {
 					// need to add toastr for successful sign up
+					this.newUser.fcmID = '';
 					this.currentuser.setUser(this.newUser);
 					console.log('** success signed up');
 					console.log(this.newUser);				
 					this.newUser.password = ''; // remove password for security reasons
-					this.navCtrl.setRoot(HomePage);
+					this.navCtrl.push(SideMenuPage);
 				} else {
 					this.presentToast('username already exists, please provide another username', 'toastrFail');
 				}

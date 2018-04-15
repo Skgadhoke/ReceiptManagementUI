@@ -1,21 +1,3 @@
-<!--
-  Generated template for the AddReceiptPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<!-- <ion-header>
-
-  <ion-navbar>
-    <ion-title>add-receipt</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-<ion-content padding>
-
-</ion-content> -->
-
 <ion-header>
   <ion-navbar>
     <ion-buttons start>
@@ -45,6 +27,7 @@
           placeholder="Store Name" 
           name="storeName" 
           [(ngModel)]= "myReciept.store"
+          (input)="userInput()" 
       >
       </ion-input>
     </ion-item>
@@ -58,7 +41,8 @@
 
     <ion-item id="addReceipt-input8">
       <ion-label> $ </ion-label>
-      <ion-input 
+      <ion-input
+        (input)="userInput()"  
         type="number" 
         placeholder="Total Amount" 
         name="amount"
@@ -103,16 +87,16 @@
 
   </form>
   <form id="addReceipt-form8">
-    <ion-item id="addReceipt-toggle7">
+    <ion-item id="addReceipt-toggle7" >
       <ion-label>
-        Shared with: 
+        Shared with: {{currUsr.sharedRecieptUser}}
       </ion-label>
-      <ion-toggle color="positive" checked="false" name="isSharedToggle" [(ngModel)]="isShared"></ion-toggle>
+      <ion-toggle [disabled]=!isSharedToggleEnsabled color="positive" checked="false" name="isSharedToggle" [(ngModel)]="isShared"></ion-toggle>
     </ion-item>
   </form>
   <div id="addReceipt-container2">
     <form id="addReceipt-form7">
-      <button [disabled]=isEnabled 
+      <button [disabled]=!isEnabled 
           id="addReceipt-button2" 
           ion-button color="positive" 
           block 

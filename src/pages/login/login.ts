@@ -40,10 +40,6 @@ export class LoginPage {
 
 					this.currUser.userID = succ;
 					this.currentuser.setUser(this.currUser);
-					// need to set user
-
-					this.presentToast('Successfully logged in', 'toastrSuccess');
-					// this.navCtrl.push(HomePage);
 					this.navCtrl.push(SideMenuPage);
 				} else {
 					this.presentToast('Incorrect credentials please try again', 'toastrFail');

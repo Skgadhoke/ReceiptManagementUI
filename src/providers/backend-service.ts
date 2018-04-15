@@ -14,7 +14,7 @@ export class backendProvider {
 	newPhotoUri ='https://cs422.azurewebsites.net/api/postImage?code=ETbAtMwgRxOGyufsTob8BFj9vabc8/P12gf4H6gnlre/grGoNoqSMw==';
 
   	updateUserInfo = 'https://cs422.azurewebsites.net/api/updateUser?code=YYa5y9butQkYde3PgNBfpL3/2NGsh74HH2KLZ1ibzGM/ogJBB0O3Uw==';
-	updateSharedRecieptInfoUri = 'https://cs422.azurewebsites.net/api/updateSharedReceipt?code=NqwT3Nj3HJn8VCJ0opkWuTbrahtj8CMw9H3Jeoe5cN5c1z6DfzslFg==';
+	updateSharedRecieptInfoUri = 'https://cs422.azurewebsites.net/api/updateUser?code=YYa5y9butQkYde3PgNBfpL3/2NGsh74HH2KLZ1ibzGM/ogJBB0O3Uw==';
 
 	getRecieptsUri = 'https://cs422.azurewebsites.net/api/getReciepts?code=aGjRTHnwO1S8ck/coagl2HIAXT6PNdVlQJeTxafoFhiC3onLUEJ8aA=='
 	getPhotoUri = 'https://cs422.azurewebsites.net/api/getImage?code=vju7hwo1wqatI1MtzZ31yDykvTRbi2Hee6C/9VIsALSFMUaMxWBbcA==';
@@ -29,7 +29,6 @@ export class backendProvider {
 	constructor(public http: Http) {
 		console.log('Hello LoginProvider Provider');
 	}
-
 	
 	// POST APIs
 	postNewUser(usr: any): Observable<any> {
@@ -40,14 +39,14 @@ export class backendProvider {
 			'Authorization': 'Basic'
 		});
 		options = new RequestOptions({ headers: headers });
-		body = { username: usr.username, email: usr.email, password: usr.password, sharedWith: usr.sharedRecieptUser };
+		body = { username: usr.username, email: usr.email, password: usr.password, sharedWith: usr.sharedRecieptUser, pushID: usr.fcmID };
 		return this.http.post(this.signUpUri, body, options)
 			.map(this.handleResponse)
 			.catch(this.handleError);
 	}
 
 
-	createNewReciept(username: any, reciept: any, sharedUser: any): Observable<any> {
+	createNewReciept(usr: any, reciept: any): Observable<any> {
 		// alert('shared with: ' + sharedUser);
 		let headers, options, body;
 		headers = new Headers({ 
@@ -57,14 +56,14 @@ export class backendProvider {
 		});
 		options = new RequestOptions({ headers: headers });
 		body = { 
-			username: username, 
+			username: usr.username, 
 			reciept_date: reciept.day, 
 			amount: reciept.amount,
 			category: reciept.category,
 			tags: reciept.tag,
 			recieptID: '1',
 			store: reciept.store,
-			sharedwith: sharedUser
+			sharedwith: usr.sharedRecieptUser
 		};
 		return this.http.post(this.newRecieptUri, body, options)
 			.map(this.handleResponse)
@@ -88,7 +87,7 @@ export class backendProvider {
 
 
 	// PUT APIs
-	updateUser(usr: any, updatedName: any): Observable<any> {
+	updateUser(usr: any): Observable<any> {
 		let headers, options, body;
 		headers = new Headers({ 
 			'Content-Type': 'application/json',
@@ -96,7 +95,7 @@ export class backendProvider {
 			'Authorization': 'Basic'
 		});
 		options = new RequestOptions({ headers: headers });
-		body = { username: usr.username, email: usr.email, sharedUser: usr.sharedRecieptUser, pushID: '', name: updatedName };
+		body = { username: usr.username, sharedUser: usr.sharedRecieptUser };
 		return this.http.put(this.updateSharedRecieptInfoUri, body, options)
 			.map(this.handleResponse)
 			.catch(this.handleError);

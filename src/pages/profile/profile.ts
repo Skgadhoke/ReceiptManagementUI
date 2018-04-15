@@ -22,22 +22,21 @@ export class ProfilePage {
       console.log('ionViewDidLoad ProfilePage');
     }
 
-
-
 	editUserInfo () {
 		this.presentToast('Will be implemented soon', 'toastrInfo');
 	}
 
     addPartner() {
-		this.currentUser.setUser(this.myUser);
-		this.backend.updateUser(this.myUser, this.myUser.username).subscribe (
-			succ => {
-				this.presentToast('Successfully added reciept', 'toastrSuccess');
-			}, 
-			err => {
-				this.presentToast('Error: Could not add reciept', 'toastrFail');
-			}
-		);
+			this.currentUser.setUser(this.myUser);
+			console.log(this.myUser);
+			this.backend.updateUser(this.myUser).subscribe (
+				succ => {
+					this.presentToast('Successfully added partner', 'toastrSuccess');
+				}, 
+				err => {
+					this.presentToast('Error: Could not add reciept', 'toastrFail');
+				}
+			);
 	}
 	
 	private presentToast(message: any, toastCss: any) {
