@@ -8,12 +8,6 @@ import { CurrentUser } from '../../providers/current-user';
 import { backendProvider } from '../../providers/backend-service';
 import { ToastController } from 'ionic-angular';
 
-/**
- * Generated class for the HistoryPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
 	selector: 'page-history',
@@ -24,18 +18,14 @@ export class HistoryPage {
 	reciepts: any;
 	showContent: any;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams,  public currentUser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public currentuser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController) {
 		this.showContent = 0;
 		this.reciepts = [];
 
-		this.backend.getReciepts ('test').subscribe
+		let name = this.currentuser.getUser().username;
+		this.backend.getReciepts (name).subscribe
 		(
 			data => {
-				// need to add toastr for successful sign up
-				// console.log(data.reciepts);
-				
-				// alert(data.reciepts[0].recieptID);
-
 				for (let d in data.reciepts)
 					this.reciepts.push (
 						new reciept (

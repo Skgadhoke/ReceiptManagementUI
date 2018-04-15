@@ -31,7 +31,6 @@ export class HomePage {
 	// recentlyTakenPhoto: any;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private diagnostic: Diagnostic, public backend: backendProvider, private toastCtrl: ToastController) {
-	// this.currentUser = this.navParams.get('newUser');    // uncomment when sign up or login is the root page
 	this.currentUser = new user('test1', 'test1@gmail.com', 'test', '');
 	}
 

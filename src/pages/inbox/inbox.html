@@ -10,5 +10,10 @@
 
 
 <ion-content padding>
-
+	<ion-list style="text-align: center" *ngFor="let r of unReadReciepts">
+		<button ion-button full style="background:#BCDFE5; color:black; font-size:15px; height:45px" (click)=displayReciept(r)>
+			{{r.recieptID}} &nbsp; {{r.store}} &nbsp;  ${{r.amount}}
+		</button>
+	</ion-list>
+		
 </ion-content>

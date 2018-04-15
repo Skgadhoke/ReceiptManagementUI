@@ -1,45 +1,57 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */ 
+import { backendProvider } from '../../providers/backend-service';
 
-@IonicPage()
+import { ToastController } from 'ionic-angular';
+import { user } from '../signup/user';
+
+import { CurrentUser } from '../../providers/current-user';
+
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
+	myUser: any;
+    constructor(public navCtrl: NavController, public navParams: NavParams, public currentUser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController) {
+		this.myUser = this.currentUser.getUser();
+	}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
-  }
-
-
-  addPartner(){
-    if(document.getElementById("id-message").getAttribute("hidden")==null)
-    {
-    	console.log("click");
-    	document.getElementById("id-label").innerHTML="Partner ID: " 
-    	document.getElementById("id-message").setAttribute("hidden", "true");
-    	document.getElementById("add-btn").innerHTML="Edit";
- 
-    }
-    else
-    {
-        document.getElementById("id-message").removeAttribute("hidden");
-        document.getElementById("id-message").innerHTML="Edit Partner's ID";
-        
-        document.getElementById("add-btn").innerHTML="Add Partner";
+    ionViewDidLoad() {
+      console.log('ionViewDidLoad ProfilePage');
     }
 
 
-  }
+
+	editUserInfo () {
+		this.presentToast('Will be implemented soon', 'toastrInfo');
+	}
+
+    addPartner() {
+		this.currentUser.setUser(this.myUser);
+		this.backend.updateUser(this.myUser, this.myUser.username).subscribe (
+			succ => {
+				this.presentToast('Successfully added reciept', 'toastrSuccess');
+			}, 
+			err => {
+				this.presentToast('Error: Could not add reciept', 'toastrFail');
+			}
+		);
+	}
+	
+	private presentToast(message: any, toastCss: any) {
+		let toast = this.toastCtrl.create({
+		  message: message,
+		  duration: 1500,
+		  position: 'top',
+		  cssClass: toastCss
+		});
+	  
+		toast.onDidDismiss(() => {
+		  console.log('Dismissed toast');
+		});
+	  
+		toast.present();
+	  }
 }

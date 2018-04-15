@@ -34,10 +34,10 @@
     <ion-avatar item-start>
       <img src="assets/img/img_avatar.png">
     </ion-avatar>
-    <h1>Mary Williams</h1>
-    <h2><ion-icon name="mail"></ion-icon> mary@email.com</h2>
-    <h2> My User ID: ITX02199</h2>
-    <button ion-button outline id="edit" style="margin-top:18px;">Edit Profile</button>
+    <h1>{{myUser.username}}</h1>
+    <h2><ion-icon name="mail"></ion-icon> {{myUser.email}}</h2>
+    <h2> My User ID: {{myUser.userID}}</h2>
+    <button ion-button outline id="edit" style="margin-top:18px;" (click)="editUserInfo()">Edit Profile</button>
   </ion-item>
   <ion-item  style="background-color: lightgray">
   	<h2 style="padding-top:10px;">Average Income: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $ 3,000.00</h2>
@@ -45,12 +45,12 @@
   </ion-item>
   <ion-item>
   	<h1 style="padding-top:10px;">Partner Information</h1>
-  	<h2 id="id-message" style="padding-top:15px; color:red">No parter connect currently.</h2>
+  	<h2 id="id-message" style="padding-top:15px; color:red" *ngIf="myUser.sharedWith == null || myUser.sharedWith == '' ">No parter connect currently.</h2>
   </ion-item>
   <ion-item padding  id="id-item" style="width:300px; display:inline" float-left>
   	<ion-label id="id-label" color="primary">Add partner's user ID:</ion-label>
-    <ion-input id="id-input" placeholder="partner ID"></ion-input>
+    <ion-input id="id-input" placeholder="partner ID" name ="partnerID" [(ngModel)]="myUser.sharedWith"></ion-input>
   </ion-item>
-  <button ion-button id="add-btn" style="margin-top:18px; background:#d0e0e3; color:black;" (click)="addPartner()">Add Partner</button>
+  <button ion-button id="add-btn" style="margin-top:18px; background:#d0e0e3; color:black;" (click)=addPartner()>*Add Partner</button>
 </ion-list>
 </ion-content>

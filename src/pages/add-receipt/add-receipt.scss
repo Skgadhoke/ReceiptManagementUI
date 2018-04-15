@@ -5,12 +5,22 @@ page-add-receipt {
 
 .toast-md  .toast-message {
     background: #197278;
+    text-align: center
 }
 
 .toastrSuccess .toast-message {
     background: #00CECB;
+    text-align: center;
+    color: black
 }
 
 .toastrFail .toast-message {
     background: rgb(209, 71, 71);
+    text-align: center
+}
+
+.toastrInfo .toast-message {
+    background: #7293A0;
+    // color: black
+    text-align: center
 }

@@ -27,6 +27,7 @@ import { HttpModule} from '@angular/http';
 
 import { Storage } from '@ionic/storage';
 import { IonicStorageModule } from '@ionic/storage';
+
 import { CurrentUser } from '../providers/current-user';
 
 @NgModule({

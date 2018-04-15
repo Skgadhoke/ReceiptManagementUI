@@ -1,8 +1,10 @@
 export class user { 
     constructor (
 		public username: any,
-		public email: any, 
 		public password: any,
-		public sharedRecieptUser?: any
+		public email?: any, 
+		public sharedRecieptUser?: any,
+		public userID?: any,
+		public fcmID?: any,
 	){}
 }

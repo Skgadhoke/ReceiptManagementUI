@@ -18,15 +18,18 @@ export class DisplayRecieptPage {
 	}
 
 	ionViewDidLoad() {
-		console.log('ionViewDidLoad DisplayRecieptPage');
 		this.backend.getPhoto (this.selectedReciept.recieptID).subscribe (
 			data => { 
 				this.recentlyTakenPhoto = data; 
-				console.log(data);
+				console.log('success data');
 			},
 			error =>  { 
 				console.log('Error: failed to add reciept to db');
 			}
 		);
+	}
+
+	home () {
+		this.navCtrl.popToRoot();
 	}
 }

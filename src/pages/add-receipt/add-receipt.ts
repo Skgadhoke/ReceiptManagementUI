@@ -3,7 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 // import { EditConfirmationPage } from '../edit-confirmation/edit-confirmation';
 import { HistoryPage } from '../history/history';
 import { reciept } from '../history/reciept';
-import { CurrentUser } from '../../providers/current-user';
 import { backendProvider } from '../../providers/backend-service';
 import { ToastController } from 'ionic-angular';
 
@@ -18,11 +17,10 @@ export class AddReceiptPage {
     currUser: any;
     isEnabled: any;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public currentUser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public backend: backendProvider, private toastCtrl: ToastController) {
 		this.recentlyTakenPhoto = this.navParams.get('recentlyTakenPhoto');
 		this.myReciept = new reciept();
 		this.isShared = false;
-		// this.currUser = this.currentUser.getProfile().username   
 		this.currUser = 'test';
 		this.isEnabled = false;
     }
@@ -34,7 +32,6 @@ export class AddReceiptPage {
     save() {
         let sharedUser = '';
         if (this.isShared) {
-			// sharedUser = this.currentUser.getProfile().sharedRecieptUser
 			sharedUser = 'shared'; // as a temp
         }
 
@@ -64,19 +61,4 @@ export class AddReceiptPage {
             }
         );
 	}
-	
-	private presentToast(message: any, toastCss: any) {
-		let toast = this.toastCtrl.create({
-		  message: message,
-		  duration: 1500,
-		  position: 'top',
-		  cssClass: toastCss
-		});
-	  
-		toast.onDidDismiss(() => {
-		  console.log('Dismissed toast');
-		});
-	  
-		toast.present();
-	  }
 }

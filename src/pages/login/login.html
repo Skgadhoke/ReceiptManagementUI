@@ -9,7 +9,7 @@
   
 
   <ion-content padding>
-      <form (ngSubmit)="onSignUp()">
+      <form (ngSubmit)="login()">
           <ion-item> 
              <ion-input 
                  type="text" 
@@ -33,7 +33,7 @@
            </ion-item>    
      
          <button [disabled]="!isenabled"ion-button color="dark" type="submit" block>
-             Sign In
+             Login
          </button>
         </form>
   </ion-content>
