@@ -5,6 +5,7 @@ import { Nav, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ProfilePage } from '../profile/profile';
 import { AddReceiptPage } from '../add-receipt/add-receipt';
+import { SettingsPage } from '../settings/settings';
 
 import { LoginPage } from '../login/login'
 import { InboxPage } from '../inbox/inbox';
@@ -22,7 +23,8 @@ export class SideMenuPage {
     this.pages = [
       { title: 'Profile', component: ProfilePage },
       { title: 'Home', component: HomePage },
-      { title: 'Inbox', component: InboxPage },
+      { title: 'Inbox', component: InboxPage }
+      // { title: 'Inbox', component: SettingsPage }
       // { title: 'Sign Up', component: SignupPage },
       // { title: 'Login', component: LoginPage },
     ];

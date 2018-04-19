@@ -11,6 +11,7 @@ import { AddReceiptPage } from '../pages/add-receipt/add-receipt';
 import { DisplayRecieptPage } from '../pages/display-reciept/display-reciept';
 import { ViewActivityPage } from '../pages/view-activity/view-activity';
 import { EditConfirmationPage } from '../pages/edit-confirmation/edit-confirmation';
+import { SettingsPage } from '../pages/settings/settings';
 
 import { SignupPage } from '../pages/signup/signup'
 import { LoginPage } from '../pages/login/login'
@@ -47,7 +48,8 @@ import { CurrentUser } from '../providers/current-user';
     SignupPage,
     LoginPage,
     InboxPage,
-    SideMenuPage
+    SideMenuPage,
+    SettingsPage
   ],
   imports: [
     BrowserModule,
@@ -69,7 +71,8 @@ import { CurrentUser } from '../providers/current-user';
     SignupPage,
     LoginPage,
     InboxPage,
-    SideMenuPage
+    SideMenuPage,
+    SettingsPage
   ],
   providers: [
     StatusBar,

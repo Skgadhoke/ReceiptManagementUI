@@ -63,8 +63,9 @@ export class backendProvider {
 			tags: reciept.tag,
 			recieptID: '1',
 			store: reciept.store,
-			sharedwith: usr.sharedRecieptUser
+			sharedwith: reciept.sharedRecieptUser
 		};
+		console.log(body);
 		return this.http.post(this.newRecieptUri, body, options)
 			.map(this.handleResponse)
 			.catch(this.handleError);

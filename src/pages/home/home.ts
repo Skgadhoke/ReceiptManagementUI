@@ -151,10 +151,11 @@ export class HomePage {
 				this.navCtrl.push(AddReceiptPage, {recentlyTakenPhoto: recentlyTakenPhoto});
 				
 			}, (err) => {
-				alert('something went wrong');
+				this.presentToast('Something went wrong while opening the camera', 'toastrFail');
 			});
 		}).catch((errorCallback)=> {
-			alert('camera is not ready');
+			this.presentToast('camera cannot be openned at the moment', 'toastrFail');
+			console.log(errorCallback);
 			this.navCtrl.push(AddReceiptPage);
 		});
 	}

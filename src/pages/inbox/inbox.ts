@@ -20,7 +20,7 @@ export class InboxPage {
 		this.name = this.currentuser.getUser().username;
     }
 
-    ionViewDidLoad() {
+    ionViewDidLoad() { 
       console.log('ionViewDidLoad InboxPage');
         this.backend.getUnread (this.name).subscribe (
 			data => {
@@ -31,10 +31,10 @@ export class InboxPage {
 							data.reciepts[d].recieptID,
 							data.reciepts[d].reciept_date,
 							data.reciepts[d].store,
-							data.reciepts[d].amount,
 							data.reciepts[d].category,
 							data.reciepts[d].tags,
-							data.reciepts[d].sharedWith
+							data.reciepts[d].sharedWith,
+							data.reciepts[d].amount
 						)
 					);
 				this.presentToast('Successfully retrieved un-read shared reciepts', 'toastrSuccess');

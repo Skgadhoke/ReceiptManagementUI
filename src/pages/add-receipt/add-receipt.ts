@@ -20,7 +20,14 @@ export class AddReceiptPage {
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public currentuser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController) {
 		this.recentlyTakenPhoto = this.navParams.get('recentlyTakenPhoto');
-		this.myReciept = new reciept('', '', '', '', '', '', '');
+        this.myReciept = new reciept();
+        this.myReciept.day = -1;
+        this.myReciept.store = '';
+        this.myReciept.category = '';
+        this.myReciept.tag = '';
+        this.myReciept.sharedWith = '';
+
+
 		this.isShared = false;
         this.isEnabled = false;
         this.currUsr = this.currentuser.getUser();
@@ -30,7 +37,6 @@ export class AddReceiptPage {
         console.log(this.currUsr.sharedRecieptUser );
 
         if (this.currUsr.sharedRecieptUser) {
-            console.log('shared toggle is true');
             this.isSharedToggleEnsabled = true;
         }
     }
@@ -40,6 +46,12 @@ export class AddReceiptPage {
     }
 
     save() {
+        if (this.isShared) {
+            console.log('shared: ' + this.isShared);
+            this.myReciept.sharedWith = this.currUsr.sharedRecieptUser;
+        } else {
+            this.myReciept.sharedWith = '';
+        }
         // this.navCtrl.push(EditConfirmationPage, {myReciept: this.myReciept, recentlyTakenPhoto: this.recentlyTakenPhoto});
         this.backend.createNewReciept (this.currUsr, this.myReciept).subscribe
         (
@@ -51,12 +63,13 @@ export class AddReceiptPage {
                 this.backend.newPhoto (data, this.recentlyTakenPhoto).subscribe (
                     succ => {
                         this.presentToast('Successfully added reciept', 'toastrSuccess');
+                        this.navCtrl.push(HistoryPage);
                     }, 
                     err => {
                         this.presentToast('Error: Could not add reciept', 'toastrFail');
+                        this.navCtrl.push(HistoryPage);
                     }
                 );
-                this.navCtrl.push(HistoryPage);
             },
             error =>  { 
                 // need to add toastr for failure sign up

@@ -31,10 +31,18 @@
 		</ion-item>
 
 		<ion-item padding  id="id-item" style="width:300px; display:inline" float-left>
-			<ion-label id="id-label" color="primary">Add partner's user ID:</ion-label>
+			<ion-label id="id-label" color="primary">partner username:</ion-label>
 			<ion-input id="id-input" placeholder="partner ID" name ="partnerID" [(ngModel)]="myUser.sharedRecieptUser"></ion-input>
 		</ion-item>
 		
 		<button ion-button id="add-btn" style="margin-top:18px; background:#d0e0e3; color:black;" (click)=addPartner()>Add Partner</button>
+		<button 
+        ion-button 
+        full 
+        style="background:#d0e0e3; color:black; font-size:15px; height:45px" 
+        (click)=help()
+    >
+        Help
+    </button>
 	</ion-list>
 </ion-content>

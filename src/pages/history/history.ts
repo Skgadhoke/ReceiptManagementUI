@@ -6,7 +6,8 @@ import { DisplayRecieptPage } from '../display-reciept/display-reciept';
 
 import { CurrentUser } from '../../providers/current-user';
 import { backendProvider } from '../../providers/backend-service';
-import { ToastController } from 'ionic-angular';
+import { ToastController, LoadingController } from 'ionic-angular';
+import { HomePage } from '../home/home';
 
 
 @Component({
@@ -18,36 +19,48 @@ export class HistoryPage {
 	reciepts: any;
 	showContent: any;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public currentuser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public currentuser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController, public loadingCtrl: LoadingController) {
 		this.showContent = 0;
 		this.reciepts = [];
 
+		let loading = this.loadingCtrl.create({
+			spinner: 'crescent',
+			// duration: 200
+		});
+
 		let name = this.currentuser.getUser().username;
-		this.backend.getReciepts (name).subscribe
-		(
-			data => {
-				for (let d in data.reciepts)
-					this.reciepts.push (
-						new reciept (
-							data.reciepts[d].recieptID,
-							data.reciepts[d].reciept_date,
-							data.reciepts[d].store,
-							data.reciepts[d].amount,
-							data.reciepts[d].category,
-							data.reciepts[d].tags,
-							data.reciepts[d].sharedWith
-						)
-					);
 
+		loading.present().then(()=> {
+			this.backend.getReciepts (name).subscribe
+			(
+				data => {
+					for (let d in data.reciepts)
+						this.reciepts.push (
+							new reciept (
+								data.reciepts[d].recieptID,
+								data.reciepts[d].reciept_date,
+								data.reciepts[d].store,
+								data.reciepts[d].category,
+								data.reciepts[d].tags,
+								data.reciepts[d].sharedWith,
+								data.reciepts[d].amount
+							)
+						);
 
-			},
-			error =>  { 
-		// need to add toastr for failure sign up
-			this.presentToast('Error: Could not load reciepts', 'toastrFail');
-				console.log('Error: failed to add reciept to db');
-				console.log(error);
-			}
-		);
+						loading.dismiss();
+				},
+				error =>  { 
+			// need to add toastr for failure sign up
+				this.presentToast('Error: Could not load reciepts', 'toastrFail');
+					console.log('Error: failed to get reciepts to db');
+					console.log(error);
+				}
+			);
+			loading.onDidDismiss(() => {
+				console.log('Dismissed loading');
+			});
+		});
+		
 	}
 
 
@@ -95,5 +108,7 @@ export class HistoryPage {
 		this.navCtrl.push(DisplayRecieptPage, {currReciept: currReciept});
 	}
 
-	segmentChanged () {}
+	home () {
+		this.navCtrl.setRoot(HomePage);
+	}
 }

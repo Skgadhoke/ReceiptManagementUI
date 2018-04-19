@@ -7,6 +7,7 @@ import { ToastController } from 'ionic-angular';
 import { user } from '../signup/user';
 
 import { CurrentUser } from '../../providers/current-user';
+import { SettingsPage } from '../settings/settings';
 
 @Component({
   selector: 'page-profile',
@@ -52,5 +53,9 @@ export class ProfilePage {
 		});
 	  
 		toast.present();
-	  }
+		}
+		
+		help () {
+			this.navCtrl.push(SettingsPage);
+		}
 }
