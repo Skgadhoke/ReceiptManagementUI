@@ -33,6 +33,7 @@ export class LoginPage {
 		});
 	
 		loading.present().then (() => {
+			// uncomment for testing purpose so you don't have to hit the endpoint every single time
 			// this.currUser.username = 'Test';
 			// this.currUser.email = 'Test@gmail.com';
 			// this.currUser.sharedRecieptUser = 'Beta';

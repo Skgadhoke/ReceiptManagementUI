@@ -30,12 +30,18 @@
 			<h2 id="id-message" style="padding-top:15px; color:red" *ngIf="myUser.sharedRecieptUser == null || myUser.sharedRecieptUser == '' ">No parter connect currently.</h2>
 		</ion-item>
 
-		<ion-item padding  id="id-item" style="width:300px; display:inline" float-left>
+		<ion-item padding  id="id-item" style="width:300px; display:inline" float-left *ngIf="myUser.sharedRecieptUser == ''">
 			<ion-label id="id-label" color="primary">partner username:</ion-label>
 			<ion-input id="id-input" placeholder="partner ID" name ="partnerID" [(ngModel)]="myUser.sharedRecieptUser"></ion-input>
 		</ion-item>
+		<button *ngIf="myUser.sharedRecieptUser == ''" ion-button id="add-btn" style="margin-top:18px; background:#d0e0e3; color:black;" (click)=addPartner()>Add Partner</button>
 		
-		<button ion-button id="add-btn" style="margin-top:18px; background:#d0e0e3; color:black;" (click)=addPartner()>Add Partner</button>
+		<ion-item padding  id="id-item" style="width:300px; display:inline" float-left *ngIf="myUser.sharedRecieptUser != ''">
+			<ion-label id="id-label" color="primary">currently sharing with :</ion-label>
+			<ion-input id="id-input" placeholder="partner ID" name ="partnerID" [(ngModel)]="myUser.sharedRecieptUser"></ion-input>
+		</ion-item>
+		<button *ngIf="myUser.sharedRecieptUser != ''" ion-button id="add-btn" style="margin-top:18px; background:#d0e0e3; color:black;" (click)=removePartner()>Remove Partner</button>
+
 		<button 
         ion-button 
         full 

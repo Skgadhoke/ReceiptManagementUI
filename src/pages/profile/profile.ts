@@ -58,4 +58,8 @@ export class ProfilePage {
 		help () {
 			this.navCtrl.push(SettingsPage);
 		}
+
+		removePartner () {
+			this.presentToast('will be implemented soon', 'toastrInfo');
+		}
 }
