@@ -33,36 +33,37 @@ export class LoginPage {
 		});
 	
 		loading.present().then (() => {
-			this.currUser.username = 'Test';
-			this.currUser.email = 'Test@gmail.com';
-			this.currUser.sharedRecieptUser = 'Beta';
-			this.currUser.userID = '1';
-			this.currentuser.setUser(this.currUser);
-			this.navCtrl.push(SideMenuPage);
-			loading.dismiss();
-			// this.backend.authUser (this.currUser).subscribe (
-			// 	succ => {
-			// 		console.log(succ.users.length);
-			// 		if (succ.users.length != 0) {
-			// 			this.currUser.username = succ.users[0].username;
-			// 			this.currUser.email = succ.users[0].email;
-			// 			this.currUser.fcmID = succ.users[0].pushID;
-			// 			this.currUser.sharedRecieptUser = succ.users[0].sharedWith;
-			// 			this.currUser.userID = succ.users[0].userID;
-			// 			console.log(this.currUser);
+			// this.currUser.username = 'Test';
+			// this.currUser.email = 'Test@gmail.com';
+			// this.currUser.sharedRecieptUser = 'Beta';
+			// this.currUser.userID = '1';
+			// this.currentuser.setUser(this.currUser);
+			// this.navCtrl.push(SideMenuPage);
+			// loading.dismiss();
+
+			this.backend.authUser (this.currUser).subscribe (
+				succ => {
+					console.log(succ.users.length);
+					if (succ.users.length != 0) {
+						this.currUser.username = succ.users[0].username;
+						this.currUser.email = succ.users[0].email;
+						this.currUser.fcmID = succ.users[0].pushID;
+						this.currUser.sharedRecieptUser = succ.users[0].sharedWith;
+						this.currUser.userID = succ.users[0].userID;
+						console.log(this.currUser);
 	
-			// 			this.currUser.userID = succ;
-			// 			this.currentuser.setUser(this.currUser);
-			// 			this.navCtrl.push(SideMenuPage);
-			// 			loading.dismiss();
-			// 		} else {
-			// 			this.presentToast('Incorrect credentials please try again', 'toastrFail');
-			// 		}
-			// 	}, 
-			// 	err => {
-			// 		this.presentToast('Error: Could not log in', 'toastrFail');
-			// 	}
-			// );
+						this.currUser.userID = succ;
+						this.currentuser.setUser(this.currUser);
+						this.navCtrl.push(SideMenuPage);
+						loading.dismiss();
+					} else {
+						this.presentToast('Incorrect credentials please try again', 'toastrFail');
+					}
+				}, 
+				err => {
+					this.presentToast('Error: Could not log in', 'toastrFail');
+				}
+			);
 
 			loading.onDidDismiss(() => {
 				console.log('Dismissed loading');
