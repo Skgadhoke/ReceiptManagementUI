@@ -72,7 +72,7 @@ export class HomePage {
 		new Chart(this.doughnutCanvas.nativeElement, {
 			type: 'doughnut',
 			data: {
-			labels: ["Utilies", "Store", "Restraurants", "Misc."],
+			labels: ["Utilities", "Stores", "Restraurants", "Misc."],
 			datasets: [{
 				label: "Population (millions)",
 				backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
@@ -80,34 +80,45 @@ export class HomePage {
 			}]
 			},
 			options: {
-			title: {
-				display: true,
-				text: 'April 2018'
-			}
+				title: {
+					display: true,
+					text: 'April 2018',
+					fontSize:40
+				},
+				tooltips: {
+		            mode: 'index',
+		            intersect: false,
+		            callbacks: {
+		                label: function (t, d) {
+		                		var label = d.labels[t.index];
+		                        return label+": "+ '$' + d.datasets[t.datasetIndex].data[t.index];
+		                    }
+		            }
+	        	}
 			}
 		});
 
 		Chart.pluginService.register({
 			beforeDraw: function(chart) {
 				var width = chart.chart.width,
-				height = chart.chart.height,
+				var height = chart.chart.height-40,
 				ctx = chart.chart.ctx;
 
 				ctx.restore();
-				var fontSize = (height / 150).toFixed(2);
+				var fontSize = (height / 260).toFixed(2);
 				ctx.font = fontSize + "em sans-serif";
 				ctx.textBaseline = "middle";
 				ctx.fillStyle = "#CC3D3D";
 
-				var text = "Total" ,
+				var text = "Total Spending" ,
 					textX = Math.round((width - ctx.measureText(text).width) / 2),
-					textY = height / 2 ;
+					textY = height / 2 +40;
 
 				ctx.fillText(text, textX, textY);
 
 				var text2 = "$ 2,579" ,
 					textX2 = Math.round((width - ctx.measureText(text2).width) / 2),
-					textY2 = height /2 + height / 11;
+					textY2 = height /2 + height / 11+40;
 
 				ctx.fillText(text2, textX2, textY2);
 
