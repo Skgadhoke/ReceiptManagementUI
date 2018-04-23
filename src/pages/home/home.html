@@ -13,27 +13,27 @@
     <ion-tab [root]="shared"></ion-tab>
   </ion-tabs> -->
   
-  <h2 style="font-family: Comic Sans MS, cursive, sans-serif; color: #43c8bb"> Hello, {{currUser.username}}</h2>
+  <h2 style="font-family: Comic Sans MS, sans-serif; color: #43c8bb"> Hello, {{currUser.username}}</h2>
   <ion-card>
       <ion-card-content>
           <canvas #doughnutCanvas width=250% height=250%></canvas>
         </ion-card-content>
-      </ion-card>
+  </ion-card>
       <ion-item text-center>
-          <button ion-button full style="background:#d0e0e3; color:black; font-size:15px; height:45px" (click)=takePicture()>Add Reciept &nbsp;
-            <ion-icon name="add"></ion-icon></button>
+          <button ion-button round full style="background:#d0e0e3; color:black; font-size:15px; height:45px" (click)=takePicture()><ion-icon name="add"></ion-icon>&nbsp;&nbsp;Add Reciept&nbsp; 
+            </button>
       </ion-item>
-      <ion-item text-center>
-          <button ion-button full style="background:#d0e0e3; color:black; font-size:15px; height:45px" (click)=viewHistory()>View History &nbsp;
-            <ion-icon name="paper"></ion-icon></button>
+      <ion-item text-center style="margin-top:-15px">
+          <button ion-button round full style="background:#d0e0e3; color:black; font-size:15px; height:45px;" (click)=viewHistory()><ion-icon name="paper"></ion-icon>&nbsp;&nbsp;View History 
+            </button>
       </ion-item>
-      <ion-item  text-center>
-          <button ion-button full style="background:#d0e0e3; color:black; font-size:15px; height:45px" (click)=viewActivity()>View Activity &nbsp;
-            <ion-icon name="briefcase"></ion-icon></button>
+      <ion-item  text-center style="margin-top:-15px">
+          <button ion-button round full style="background:#d0e0e3; color:black; font-size:15px; height:45px" (click)=viewActivity()><ion-icon name="briefcase"></ion-icon>&nbsp;&nbsp;View Activity 
+            </button>
       </ion-item>
-      <ion-item text-center>
-          <button ion-button full style="background:#d0e0e3; color:black; font-size:15px; height:45px" >Set Reminder &nbsp;
-            <ion-icon name="alarm"></ion-icon></button>
+      <ion-item text-center style="margin-top:-15px">
+          <button ion-button round full style="background:#d0e0e3; color:black; font-size:15px; height:45px" ><ion-icon name="alarm"></ion-icon>&nbsp;&nbsp;Set Reminder 
+            </button>
       </ion-item>
 
         <!-- <ion-fab right bottom style="padding-right:15px; padding-bottom: 15px">
