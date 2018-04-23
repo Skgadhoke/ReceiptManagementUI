@@ -18,6 +18,7 @@ export class HistoryPage {
 	historyToggle: any;
 	reciepts: any;
 	showContent: any;
+	originalReceipts: any;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public currentuser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController, public loadingCtrl: LoadingController) {
 		this.showContent = 0;
@@ -25,7 +26,7 @@ export class HistoryPage {
 
 		let loading = this.loadingCtrl.create({
 			spinner: 'crescent',
-			// duration: 200
+			duration: 200
 		});
 
 		let name = this.currentuser.getUser().username;
@@ -54,6 +55,7 @@ export class HistoryPage {
 				this.presentToast('Error: Could not load reciepts', 'toastrFail');
 					console.log('Error: failed to get reciepts to db');
 					console.log(error);
+					loading.dismiss();
 				}
 			);
 			loading.onDidDismiss(() => {
@@ -61,6 +63,7 @@ export class HistoryPage {
 			});
 		});
 		
+		this.originalReceipts = this.reciepts;
 	}
 
 
@@ -110,5 +113,34 @@ export class HistoryPage {
 
 	home () {
 		this.navCtrl.setRoot(HomePage);
+	}
+
+	search(ev: any) {
+	    
+	   // set val to the value of the searchbar
+	   let val = ev.target.value.toLowerCase();
+	   
+	   this.reciepts = this.originalReceipts.slice();
+	   var deleted=false;
+	   while(!deleted)
+	   {
+	      deleted= true;
+	      this.reciepts.forEach((item, index) => {
+	         //console.log(val); // 9, 2, 5
+	         var strItem  = item.store+":"+item.category+":"+item.tag+":"+item.amount+":"+item.day;
+	         strItem = strItem.toLowerCase();
+	        console.log(strItem); // 9, 2, 5
+	         if(strItem.includes(val)==false)
+	         {
+	            this.reciepts.splice(index, 1);
+	            deleted=false;
+	         }
+	         
+	     });
+	  }
+	}
+	
+	trackByFn(index, item) {
+	    return index;
 	}
 }

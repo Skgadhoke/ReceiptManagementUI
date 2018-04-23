@@ -24,9 +24,7 @@ export class ProfilePage {
 
 			if (!this.myUser.userPic) {
 				this.myAvatarPic = 'assets/img/img_avatar.png';
-				alert('test');
 			} else {
-				alert('**');
 				this.myAvatarPic = this.myUser.userPic;
 			}
 			
