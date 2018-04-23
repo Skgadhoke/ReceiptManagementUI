@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { HistoryPage } from '../history/history';
 import { reciept } from '../history/reciept';
 import { backendProvider } from '../../providers/backend-service';
-import { ToastController } from 'ionic-angular';
+import { ToastController, LoadingController } from 'ionic-angular';
 import { CurrentUser } from '../../providers/current-user';
 
 @Component({
@@ -18,7 +18,7 @@ export class AddReceiptPage {
     isEnabled: any;
     isSharedToggleEnsabled: any;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public currentuser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public currentuser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController, public loadingCtrl: LoadingController) {
 		this.recentlyTakenPhoto = this.navParams.get('recentlyTakenPhoto');
         this.myReciept = new reciept();
         this.myReciept.day = -1;
@@ -52,32 +52,49 @@ export class AddReceiptPage {
         } else {
             this.myReciept.sharedWith = '';
         }
-        // this.navCtrl.push(EditConfirmationPage, {myReciept: this.myReciept, recentlyTakenPhoto: this.recentlyTakenPhoto});
-        this.backend.createNewReciept (this.currUsr, this.myReciept).subscribe
-        (
-            data => {
-                console.log(data);
-                // need to add toastr for successful sign up
-                console.log('** success added reciept to db');
+        this.isEnabled = false;
 
-                this.backend.newPhoto (data, this.recentlyTakenPhoto).subscribe (
-                    succ => {
-                        this.presentToast('Successfully added reciept', 'toastrSuccess');
-                        this.navCtrl.push(HistoryPage);
-                    }, 
-                    err => {
-                        this.presentToast('Error: Could not add reciept', 'toastrFail');
-                        this.navCtrl.push(HistoryPage);
-                    }
-                );
-            },
-            error =>  { 
-                // need to add toastr for failure sign up
-                this.presentToast('Error: Could not add reciept', 'toastrFail');
-                console.log('Error: failed to add reciept to db');
-                console.log(error);
-            }
-        );
+        let loading = this.loadingCtrl.create({
+			spinner: 'crescent'
+        });
+    
+        loading.present().then (() => { 
+            // this.navCtrl.push(EditConfirmationPage, {myReciept: this.myReciept, recentlyTakenPhoto: this.recentlyTakenPhoto});
+            this.backend.createNewReciept (this.currUsr, this.myReciept).subscribe
+            (
+                data => {
+                    console.log(data);
+                    // need to add toastr for successful sign up
+                    console.log('** success added reciept to db');
+
+                    this.backend.newPhoto (data, this.recentlyTakenPhoto).subscribe (
+                        succ => {
+                            this.presentToast('Successfully added reciept', 'toastrSuccess');
+                            this.navCtrl.push(HistoryPage);
+                        }, 
+                        err => {
+                            this.presentToast('Error: Could not add reciept', 'toastrFail');
+                            this.navCtrl.push(HistoryPage);
+                        }
+                    );
+                    loading.dismiss();
+                },
+                error =>  { 
+                    // need to add toastr for failure sign up
+                    this.presentToast('Error: Could not add reciept', 'toastrFail');
+                    console.log('Error: failed to add reciept to db');
+                    console.log(error);
+                    loading.dismiss();
+                }
+
+                
+            );
+
+
+            loading.onDidDismiss(() => {
+				console.log('Dismissed loading');
+			});
+		});    
     }
     
     private presentToast(message: any, toastCss: any) {

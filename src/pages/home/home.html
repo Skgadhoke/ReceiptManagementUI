@@ -19,10 +19,11 @@
         <ion-segment-button value="personal" style="font-size:1.2em; height:2.3em; color: #43c8bb" (ionSelect)="selectedPersonal()" >
           Personal
         </ion-segment-button>
-        <ion-segment-button value="shared" style="font-size:1.2em; height:2.3em; color: #43c8bb" (ionSelect)="selectedShared()">
+        <ion-segment-button [disabled]=!isSharedEnabled value="shared" style="font-size:1.2em; height:2.3em; color: #43c8bb" (ionSelect)="selectedShared()">
           Shared
         </ion-segment-button>
-        <ion-segment-button value="personal+shared" style="font-size:1.2em; height:2.3em; color: #43c8bb" (ionSelect)="selectedBoth()">
+        <ion-segment-button [disabled]=!isSharedEnabled value="personal+shared" style="font-size:1.2em; height:2.3em; color: #43c8bb" (ionSelect)="selectedBoth()">
+
           Personal+Shared
         </ion-segment-button>
       </ion-segment>

@@ -26,7 +26,7 @@ export class HistoryPage {
 
 		let loading = this.loadingCtrl.create({
 			spinner: 'crescent',
-			// duration: 200
+			duration: 200
 		});
 
 		let name = this.currentuser.getUser().username;
@@ -55,6 +55,7 @@ export class HistoryPage {
 				this.presentToast('Error: Could not load reciepts', 'toastrFail');
 					console.log('Error: failed to get reciepts to db');
 					console.log(error);
+					loading.dismiss();
 				}
 			);
 			loading.onDidDismiss(() => {
