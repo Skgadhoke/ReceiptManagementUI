@@ -144,8 +144,8 @@ export class HomePage {
 
 		Chart.pluginService.register({
 			beforeDraw: function(chart) {
-				var width = chart.chart.width,
-				height = chart.chart.height,
+				var width = chart.chart.width
+				var height = chart.chart.height-40,
 				ctx = chart.chart.ctx;
 
 				ctx.restore();
