@@ -16,11 +16,14 @@
   <h2 style="font-family: Comic Sans MS, sans-serif; color: #43c8bb"> Hello, {{currUser.username}}</h2>
   <ion-card>
       <ion-segment [(ngModel)]="option" color="#43c8bb">
-        <ion-segment-button value="personal" style="font-size:1.5em; height:2em; color: #43c8bb" (ionSelect)="selectedPersonal()" >
+        <ion-segment-button value="personal" style="font-size:1.2em; height:2.3em; color: #43c8bb" (ionSelect)="selectedPersonal()" >
           Personal
         </ion-segment-button>
-        <ion-segment-button value="shared" style="font-size:1.5em; height:2em; color: #43c8bb" (ionSelect)="selectedShared()">
+        <ion-segment-button value="shared" style="font-size:1.2em; height:2.3em; color: #43c8bb" (ionSelect)="selectedShared()">
           Shared
+        </ion-segment-button>
+        <ion-segment-button value="personal+shared" style="font-size:1.2em; height:2.3em; color: #43c8bb" (ionSelect)="selectedBoth()">
+          Personal+Shared
         </ion-segment-button>
       </ion-segment>
 

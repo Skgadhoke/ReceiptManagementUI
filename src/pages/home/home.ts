@@ -251,4 +251,8 @@ export class HomePage {
 	{
 		this.presentToast('We are still working on it', 'toastrFail');
 	}
+	selectedBoth()
+	{
+		this.presentToast('We are still working on it', 'toastrFail');
+	}
 }
