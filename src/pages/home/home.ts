@@ -40,6 +40,7 @@ export class HomePage {
 		this.categoryMap = {'utilities': 0, 'restaurants': 0, 'groceries': 0, 'misc': 0, 'shopping': 0}
 		this.total = '';
 		this.option = "personal";
+	}
 
 		if (this.currUser.sharedWith == '') {
 			this.isSharedEnabled = false;
@@ -223,6 +224,7 @@ export class HomePage {
 
 	selectedPersonal()
 	{
+
 		let reciepts = this.currentuser.getReciepts();
 		let sharedWith = this.currentuser.getUser().sharedRecieptUser;
 
@@ -255,13 +257,15 @@ export class HomePage {
 
 		console.log(this.categoryMap);
 		this.chartTest();
+
 	}
 	selectedShared()
 	{
 		this.presentToast('We are still working on it', 'toastrFail');
 	}
 
-	selectedBoth () {
-
+	selectedBoth()
+	{
+		this.presentToast('We are still working on it', 'toastrFail');
 	}
 }
