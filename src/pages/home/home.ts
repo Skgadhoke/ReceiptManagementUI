@@ -100,7 +100,7 @@ export class HomePage {
 
 		Chart.pluginService.register({
 			beforeDraw: function(chart) {
-				var width = chart.chart.width,
+				var width = chart.chart.width
 				var height = chart.chart.height-40,
 				ctx = chart.chart.ctx;
 
