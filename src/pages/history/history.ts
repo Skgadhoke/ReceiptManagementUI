@@ -114,7 +114,7 @@ export class HistoryPage {
 		this.navCtrl.setRoot(HomePage);
 	}
 
-	search(ev: string) {
+	search(ev: any) {
 	    
 	   // set val to the value of the searchbar
 	   let val = ev.target.value.toLowerCase();
@@ -126,7 +126,7 @@ export class HistoryPage {
 	      deleted= true;
 	      this.reciepts.forEach((item, index) => {
 	         //console.log(val); // 9, 2, 5
-	         var strItem  = item.store+":"+item.category+":"+item.tag+":"+item.amount;
+	         var strItem  = item.store+":"+item.category+":"+item.tag+":"+item.amount+":"+item.day;
 	         strItem = strItem.toLowerCase();
 	        console.log(strItem); // 9, 2, 5
 	         if(strItem.includes(val)==false)
