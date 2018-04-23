@@ -31,12 +31,14 @@ export class HomePage {
 	base64Image: any;
 	categoryMap: any;
 	total: string;
+	option:any;
 	// recentlyTakenPhoto: any;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private diagnostic: Diagnostic, public currentuser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController) {
 		this.currUser = this.currentuser.getUser(); //new user('test1', 'test1@gmail.com', 'test', '');
 		this.categoryMap = {'utilities': 0, 'restaurants': 0, 'groceries': 0, 'misc': 0, 'shopping': 0}
 		this.total = '';
+		this.option = "personal";
 	}
 
 	// createChart () {
@@ -132,13 +134,25 @@ export class HomePage {
 			options: {
 				title: {
 					display: true,
-					text: 'April 2018'
-				}
+					text: 'April 2018',
+					fontSize:30
+				},
+				tooltips: {
+		            mode: 'index',
+		            intersect: false,
+		            callbacks: {
+		                label: function (t, d) {
+		                		var label = d.labels[t.index];
+		                        return label+": "+ '$' + d.datasets[t.datasetIndex].data[t.index];
+		                    }
+		            }
+		        }
 			},
 			centerText: {
 				display: true,
 				text: this.total,
-			}
+			},
+
 			
 		});
 
@@ -149,19 +163,19 @@ export class HomePage {
 				ctx = chart.chart.ctx;
 
 				ctx.restore();
-				var fontSize = (height / 150).toFixed(2);
+				var fontSize = (height / 300).toFixed(2);
 				ctx.font = fontSize + "em sans-serif";
 				ctx.textBaseline = "middle";
 				ctx.fillStyle = "#CC3D3D";
 
-				var text = "Total" ,
+				var text = "Total Spending" ,
 					textX = Math.round((width - ctx.measureText(text).width) / 2),
-					textY = height / 2 ;
+					textY = height / 2 +60;
 
 				ctx.fillText(text, textX, textY);
 				var text2 = chart.config.centerText.text,
 					textX2 = Math.round((width - ctx.measureText(text2).width) / 2),
-					textY2 = height /2 + height / 11;
+					textY2 = height /2 + height / 11+60;
 
 				ctx.fillText(text2, textX2, textY2);
 
@@ -228,4 +242,13 @@ export class HomePage {
 	  
 		toast.present();
 	  }
+
+	selectedPersonal()
+	{
+
+	}
+	selectedShared()
+	{
+		this.presentToast('We are still working on it', 'toastrFail');
+	}
 }
