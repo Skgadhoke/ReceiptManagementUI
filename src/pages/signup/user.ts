@@ -6,5 +6,6 @@ export class user {
 		public sharedRecieptUser?: any,
 		public userID?: any,
 		public fcmID?: any,
+		public userPic?: any
 	){}
 }

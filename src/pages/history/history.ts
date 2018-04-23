@@ -111,12 +111,4 @@ export class HistoryPage {
 	home () {
 		this.navCtrl.setRoot(HomePage);
 	}
-
-	search(ev: any) {
-  
-    // set val to the value of the searchbar
-    let val = ev.target.value;
-
-    ////////
-  }
 }

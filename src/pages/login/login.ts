@@ -38,6 +38,7 @@ export class LoginPage {
 			// this.currUser.email = 'Test@gmail.com';
 			// this.currUser.sharedRecieptUser = 'Beta';
 			// this.currUser.userID = '1';
+			// this.currUser.userPic = '';
 			// this.currentuser.setUser(this.currUser);
 			// this.navCtrl.push(SideMenuPage);
 			// loading.dismiss();
@@ -51,6 +52,7 @@ export class LoginPage {
 						this.currUser.fcmID = succ.users[0].pushID;
 						this.currUser.sharedRecieptUser = succ.users[0].sharedWith;
 						this.currUser.userID = succ.users[0].userID;
+			         this.currUser.userPic = succ.users[0].profilePic;
 						console.log(this.currUser);
 	
 						this.currUser.userID = succ;

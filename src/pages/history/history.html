@@ -10,17 +10,10 @@
 
 <ion-content padding>
   <ion-item style="text-align: center">
-<!--       <ion-icon>Filtering Options: </ion-icon> -->
-      <div style="display:inline-block; vertical-align: middle;"><ion-icon (click)="filterByCal()" name="calendar"  padding-right style="
-      font-size:40px;"></ion-icon></div>
-      <div style=" width:500px; display:inline-block">
-        <ion-searchbar [(ngModel)]="myInput"
-          [showCancelButton]="shouldShowCancel"
-          (ionInput)="search($event)"
-          (ionCancel)="onCancel($event)">
-      </ion-searchbar></div>
-<!--       <ion-icon name="cart" padding-left></ion-icon>
-      <ion-icon name="create" padding-left></ion-icon> -->
+      <ion-icon>Filtering Options: </ion-icon>
+      <ion-icon (click)="filterByCal()" name="calendar" padding-left></ion-icon>
+      <ion-icon name="cart" padding-left></ion-icon>
+      <ion-icon name="create" padding-left></ion-icon>
   </ion-item>
 
   <!-- <ion-item>
@@ -29,29 +22,29 @@
 
   <!-- This has to do with adding the cards -->
 
-  <ion-list  *ngFor="let r of reciepts">
+  <ion-list style="text-align: center" *ngFor="let r of reciepts">
     <!-- <ion-item style="text-align: center" *ngFor="let r of reciepts"> -->
-        <button ion-button full style="background:#FFFFFF; color:black; font-size:15px; height:65px; margin-bottom: -15px" (click)=displayReciept(r)> 
-            <div style="color: black" *ngIf="r.sharedWith == ''; else shared"> 
-              <ion-icon name="person" color="primary"></ion-icon>
-                <div style="width:120px; display:inline-block;"> {{r.day.split('T')[0]}} </div><div style="width:120px; display:inline-block;"> {{r.store}} </div><div style="width:120px; display:inline-block;">  ${{r.amount}}</div>
-            </div>
+        <button ion-button full style="background:#BCDFE5; color:black; font-size:15px; height:45px" (click)=displayReciept(r)>
+            <p style="color: black" *ngIf="r.sharedWith == ''; else shared"> 
+              <ion-icon name="person"></ion-icon>
+                {{r.recieptID}} &nbsp; {{r.store}} &nbsp;  ${{r.amount}}
+            </p>
             <ng-template #shared>
-                <ion-icon name="people" color="secondary"></ion-icon>
-                <div style="width:120px; display:inline-block;"> {{r.day.split('T')[0]}} </div><div style="width:120px; display:inline-block;"> {{r.store}} </div> <div style="width:120px; display:inline-block;">   ${{r.amount}} </div>
+                <ion-icon name="people"></ion-icon>
+                {{r.recieptID}} &nbsp;  {{r.store}} &nbsp;  ${{r.amount}}
             </ng-template>
           </button>
     <!-- </ion-item> -->
   </ion-list>
 
-<!--   <button 
+  <button 
         ion-button 
         full 
         style="background:#d0e0e3; color:black; font-size:15px; height:45px" 
         (click)=home()
     >
         Back Home
-    </button> -->
+    </button>
     
 </ion-content>
 

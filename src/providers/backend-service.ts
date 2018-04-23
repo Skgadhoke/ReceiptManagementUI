@@ -22,6 +22,7 @@ export class backendProvider {
 	authUserUri = 'https://cs422.azurewebsites.net/api/authUser?code=jYcv8Kb4WYigF3Kj6I/ctMl6sblzzZY3xVNT7H2Q86bxbGDZMmSfgg==';
 	getUnreadUri = 'https://cs422.azurewebsites.net/api/getUnreadMessages?code=jWquUSKPVpFcNYxNWNcw4FuBE7qQS/rgTHZEZmDTm1lCaXCFnf2Ijg==';
 
+	updateProfileUri = 'https://cs422.azurewebsites.net/api/updateUserProfileImage?code=NqwT3Nj3HJn8VCJ0opkWuTbrahtj8CMw9H3Jeoe5cN5c1z6DfzslFg=='
 	// getRecieptsUri = '';
 	
   
@@ -116,6 +117,20 @@ export class backendProvider {
 			.catch(this.handleError);
 	}
 
+
+	updateProfileImage (username: any, myPic: any): Observable<any> {
+		let headers, options, body;
+		headers = new Headers({ 
+			'Content-Type': 'application/json',
+			'Cache-Control': 'no-cache',
+			'Authorization': 'Basic'
+		});
+		options = new RequestOptions({ headers: headers });
+		body = { username: username, profilePic: myPic };
+		return this.http.put(this.updateProfileUri, body, options)
+			.map(this.handleResponse)
+			.catch(this.handleError);
+	}
 
 	// GET APIs
 	getReciepts(username: any): Observable<any> {

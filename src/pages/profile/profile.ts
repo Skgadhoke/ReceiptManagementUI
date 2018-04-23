@@ -9,14 +9,27 @@ import { user } from '../signup/user';
 import { CurrentUser } from '../../providers/current-user';
 import { SettingsPage } from '../settings/settings';
 
+import { ImagePicker } from '@ionic-native/image-picker';
+
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
 	myUser: any;
-    constructor(public navCtrl: NavController, public navParams: NavParams, public currentUser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController) {
-		this.myUser = this.currentUser.getUser();
+	myAvatarPic: any;
+
+    constructor(public navCtrl: NavController, public navParams: NavParams, public currentUser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController, private picker: ImagePicker) {
+			this.myUser = this.currentUser.getUser();
+
+			if (!this.myUser.userPic) {
+				this.myAvatarPic = 'assets/img/img_avatar.png';
+				alert('test');
+			} else {
+				alert('**');
+				this.myAvatarPic = this.myUser.userPic;
+			}
+			
 	}
 
     ionViewDidLoad() {
@@ -62,4 +75,32 @@ export class ProfilePage {
 		removePartner () {
 			this.presentToast('will be implemented soon', 'toastrInfo');
 		}
+
+		changeAvatar () {
+			
+			let options = {
+				maximumImagesCount: 1,
+				width: 500,
+				height: 500,
+				quality: 75,
+				outputType: 1
+			}
+			this.picker.getPictures(options).then((results) => {
+				for (var i = 0; i < results.length; i++) {
+						console.log('Image URI: ' + results[i]);
+						this.myAvatarPic = 'data:image/jpeg;base64,' + results[i];
+						this.backend.updateProfileImage (this.myUser.username, this.myAvatarPic).subscribe (
+							succ => {
+								console.log('successfully added image to db');
+								this.myUser = this.currentUser.updateUserPic(this.myAvatarPic);
+							},
+							err => {
+								this.presentToast('Failed to update profile image, please try again', 'toastrFail');
+							}
+					) 
+				}
+			}, (err) => { });
+		}
+		
+		
 }

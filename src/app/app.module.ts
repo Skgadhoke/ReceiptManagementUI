@@ -23,6 +23,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { Camera } from '@ionic-native/camera';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { ImagePicker } from '@ionic-native/image-picker';
 
 import { backendProvider } from '../providers/backend-service';
 import { HttpModule} from '@angular/http';
@@ -79,6 +80,7 @@ import { CurrentUser } from '../providers/current-user';
     SplashScreen,
     Camera,
     Diagnostic,
+    ImagePicker,
     backendProvider,
     CurrentUser,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
