@@ -40,7 +40,6 @@ export class HomePage {
 		this.categoryMap = {'utilities': 0, 'restaurants': 0, 'groceries': 0, 'misc': 0, 'shopping': 0}
 		this.total = '';
 		this.option = "personal";
-	}
 
 		if (this.currUser.sharedWith == '') {
 			this.isSharedEnabled = false;
