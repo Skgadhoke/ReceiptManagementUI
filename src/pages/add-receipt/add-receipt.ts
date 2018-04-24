@@ -89,11 +89,6 @@ export class AddReceiptPage {
 
                 
             );
-
-
-            loading.onDidDismiss(() => {
-				console.log('Dismissed loading');
-			});
 		});    
     }
     

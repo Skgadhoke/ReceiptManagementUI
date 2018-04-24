@@ -26,7 +26,7 @@ export class HistoryPage {
 
 		let loading = this.loadingCtrl.create({
 			spinner: 'crescent',
-			duration: 200
+			// duration: 200
 		});
 
 		let name = this.currentuser.getUser().username;
@@ -58,9 +58,9 @@ export class HistoryPage {
 					loading.dismiss();
 				}
 			);
-			loading.onDidDismiss(() => {
-				console.log('Dismissed loading');
-			});
+			// loading.onDidDismiss(() => {
+			// 	console.log('Dismissed loading');
+			// });
 		});
 		
 		this.originalReceipts = this.reciepts;

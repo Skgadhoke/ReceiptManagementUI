@@ -37,9 +37,6 @@ export class DisplayRecieptPage {
 					console.log('Error: failed to add reciept to db');
 				}
 			);
-			loading.onDidDismiss(() => {
-				console.log('Dismissed loading');
-			});
 		});
 	}
 

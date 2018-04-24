@@ -41,6 +41,7 @@ export class HomePage {
 		this.total = '';
 		this.option = "personal";
 
+
 		if (this.currUser.sharedWith == '') {
 			this.isSharedEnabled = false;
 		} else {
@@ -68,17 +69,19 @@ export class HomePage {
 				this.currentuser.setReciepts(reciepts);
 				let myTotal = 0;
 				for (let r in reciepts) {
-					if (reciepts[r].category != '') {
-						let val = this.categoryMap[reciepts[r].category];
-						let amt = reciepts[r].amount + val;
-						this.categoryMap[reciepts[r].category] = amt;
-						myTotal = myTotal +amt;
-
-					} else {
-						let val = this.categoryMap['misc'];
-						let amt = reciepts[r].amount + val;
-						this.categoryMap['misc'] = amt;
-						myTotal = myTotal +amt;
+					if (reciepts[r].sharedWith == '') {
+						if (reciepts[r].category != '') {
+							let val = this.categoryMap[reciepts[r].category];
+							let amt = reciepts[r].amount + val;
+							this.categoryMap[reciepts[r].category] = amt;
+							myTotal = myTotal +amt;
+	
+						} else {
+							let val = this.categoryMap['misc'];
+							let amt = reciepts[r].amount + val;
+							this.categoryMap['misc'] = amt;
+							myTotal = myTotal +amt;
+						}
 					}
 				}
 				console.log('Mytotal...'+myTotal.toFixed(2));
@@ -100,7 +103,7 @@ export class HomePage {
 	}
 
 	chartTest() {
-		new Chart(this.doughnutCanvas.nativeElement, {
+		this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
 			type: 'doughnut',
 			data: {
 			datasets: [{
@@ -144,7 +147,7 @@ export class HomePage {
 				var fontSize = (height / 300).toFixed(2);
 				ctx.font = fontSize + "em sans-serif";
 				ctx.textBaseline = "middle";
-				ctx.fillStyle = "#CC3D3D";
+				ctx.fillStyle = "#43c8bb";
 
 				var text = "Total Spending" ,
 					textX = Math.round((width - ctx.measureText(text).width) / 2),
@@ -164,7 +167,6 @@ export class HomePage {
 
 
 	viewHistory () {
-		// this.navCtrl.setRoot(HistoryPage);
 		this.navCtrl.push(HistoryPage);
 	}
 
@@ -223,10 +225,11 @@ export class HomePage {
 
 	selectedPersonal()
 	{
+		this.doughnutChart.destroy();
 
 		let reciepts = this.currentuser.getReciepts();
-		let sharedWith = this.currentuser.getUser().sharedRecieptUser;
-
+		console.log(reciepts);
+		
 		let myTotal = 0;
 		this.categoryMap['utilities'] = 0;
 		this.categoryMap['restaurants'] = 0;
@@ -235,19 +238,33 @@ export class HomePage {
 		this.categoryMap['shopping'] = 0;
 
 		for (let r in reciepts) {
-			if (sharedWith != '') {
+			if (reciepts[r] != undefined && reciepts[r].sharedWith == '') {
 				if (reciepts[r].category != '') {
-					let val = this.categoryMap[reciepts[r].category];
-					let amt = reciepts[r].amount + val;
-					this.categoryMap[reciepts[r].category] = amt;
-					myTotal = myTotal +amt;
+					if (reciepts[r].amount != undefined) {
+						let val = this.categoryMap[reciepts[r].category];
+						let amt = reciepts[r].amount + val;
+						this.categoryMap[reciepts[r].category] = amt;
+						myTotal = myTotal +amt;
+						console.log('amt: ' + amt);
+						console.log('myTotal ==> ' + myTotal);
+					} else {
+						console.log('went wrong');
+					}
 	
 				} else {
-					let val = this.categoryMap['misc'];
-					let amt = reciepts[r].amount + val;
-					this.categoryMap['misc'] = amt;
-					myTotal = myTotal +amt;
+					if (reciepts[r].amount != undefined) {
+						let val = this.categoryMap['misc'];
+						let amt = reciepts[r].amount + val;
+						this.categoryMap['misc'] = amt;
+						myTotal = myTotal +amt;
+						console.log('amt: ' + amt);
+						console.log('myTotal ==> ' + myTotal);
+					} else {
+						console.log('went wrong');
+					}
+					
 				}
+				
 			}
 		}
 		console.log('Mytotal...'+myTotal.toFixed(2));
@@ -260,11 +277,105 @@ export class HomePage {
 	}
 	selectedShared()
 	{
-		this.presentToast('We are still working on it', 'toastrFail');
+		this.doughnutChart.destroy();
+
+		let reciepts = this.currentuser.getReciepts();
+		console.log(reciepts);
+		
+		let myTotal = 0;
+		this.categoryMap['utilities'] = 0;
+		this.categoryMap['restaurants'] = 0;
+		this.categoryMap['groceries'] = 0;
+		this.categoryMap['misc'] = 0;
+		this.categoryMap['shopping'] = 0;
+
+		for (let r in reciepts) {
+			if (reciepts[r] != undefined && reciepts[r].sharedWith != '') {
+				if (reciepts[r].category != '') {
+					if (reciepts[r].amount != undefined) {
+						let val = this.categoryMap[reciepts[r].category];
+						let amt = reciepts[r].amount + val;
+						this.categoryMap[reciepts[r].category] = amt;
+						myTotal = myTotal +amt;
+						console.log('amt: ' + amt);
+						console.log('myTotal ==> ' + myTotal);
+					} else {
+						console.log('went wrong');
+					}
+	
+				} else {
+					if (reciepts[r].amount != undefined) {
+						let val = this.categoryMap['misc'];
+						let amt = reciepts[r].amount + val;
+						this.categoryMap['misc'] = amt;
+						myTotal = myTotal +amt;
+						console.log('amt: ' + amt);
+						console.log('myTotal ==> ' + myTotal);
+					} else {
+						console.log('went wrong');
+					}
+					
+				}
+				
+			}
+		}
+		console.log('Mytotal...'+myTotal.toFixed(2));
+		this.total = "$ " + myTotal.toFixed(2).toString();
+		console.log("My total..."+this.total);
+
+		console.log(this.categoryMap);
+		this.chartTest();
 	}
 
 	selectedBoth()
 	{
-		this.presentToast('We are still working on it', 'toastrFail');
+		this.doughnutChart.destroy();
+
+		let reciepts = this.currentuser.getReciepts();
+		console.log(reciepts);
+		
+		let myTotal = 0;
+		this.categoryMap['utilities'] = 0;
+		this.categoryMap['restaurants'] = 0;
+		this.categoryMap['groceries'] = 0;
+		this.categoryMap['misc'] = 0;
+		this.categoryMap['shopping'] = 0;
+
+		for (let r in reciepts) {
+			if (reciepts[r] != undefined) {
+				if (reciepts[r].category != '') {
+					if (reciepts[r].amount != undefined) {
+						let val = this.categoryMap[reciepts[r].category];
+						let amt = reciepts[r].amount + val;
+						this.categoryMap[reciepts[r].category] = amt;
+						myTotal = myTotal +amt;
+						console.log('amt: ' + amt);
+						console.log('myTotal ==> ' + myTotal);
+					} else {
+						console.log('went wrong');
+					}
+	
+				} else {
+					if (reciepts[r].amount != undefined) {
+						let val = this.categoryMap['misc'];
+						let amt = reciepts[r].amount + val;
+						this.categoryMap['misc'] = amt;
+						myTotal = myTotal +amt;
+						console.log('amt: ' + amt);
+						console.log('myTotal ==> ' + myTotal);
+					} else {
+						console.log('went wrong');
+					}
+					
+				}
+				
+			}
+		}
+		console.log('Mytotal...'+myTotal.toFixed(2));
+		this.total = "$ " + myTotal.toFixed(2).toString();
+		console.log("My total..."+this.total);
+
+		console.log(this.categoryMap);
+		this.chartTest();
 	}
 }
