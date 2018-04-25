@@ -32,15 +32,17 @@ export class HomePage {
 	base64Image: any;
 	categoryMap: any;
 	total: string;
-	option:any;
+	personal:any;
+	shared:any;
+
 	// recentlyTakenPhoto: any;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private diagnostic: Diagnostic, public currentuser: CurrentUser, public backend: backendProvider, private toastCtrl: ToastController) {
 		this.currUser = this.currentuser.getUser(); //new user('test1', 'test1@gmail.com', 'test', '');
 		this.categoryMap = {'utilities': 0, 'restaurants': 0, 'groceries': 0, 'misc': 0, 'shopping': 0}
 		this.total = '';
-		this.option = "personal";
-
+		this.personal = true;
+		this.shared = false;
 
 		if (this.currUser.sharedWith == '') {
 			this.isSharedEnabled = false;
@@ -223,6 +225,27 @@ export class HomePage {
 		toast.present();
 	  }
 
+
+	selectionUpdate()
+	{
+
+		if(this.personal == true)
+		{
+			if(this.shared == true)
+				this.selectedBoth();
+			else
+				this.selectedPersonal();
+		}
+		if(this.personal == false)
+		{
+			if(this.shared == true)
+				this.selectedShared();
+			else
+				this.personal = true; // make this default 
+		}
+	}
+
+
 	selectedPersonal()
 	{
 		this.doughnutChart.destroy();
@@ -378,4 +401,5 @@ export class HomePage {
 		console.log(this.categoryMap);
 		this.chartTest();
 	}
+
 }

@@ -14,18 +14,18 @@
   </ion-tabs> -->
 
   <h2 style="font-family: Comic Sans MS, sans-serif; color: #43c8bb"> Hello, {{currUser.username}}</h2>
-  <ion-card>
-      <ion-segment [(ngModel)]="option" color="#43c8bb">
-        <ion-segment-button value="personal" style="font-size:1.2em; height:4em; color: #43c8bb; line-height: 4em;text-align:center; border-width:0px 0px 2px 0px" (ionSelect)="selectedPersonal()" >
-          Personal
-        </ion-segment-button>
-        <ion-segment-button [disabled]=!isSharedEnabled value="shared" style="font-size:1.2em; height:4em; color: #43c8bb; line-height: 4em;text-align:center; border-width:0px 0px 2px 0px;" (ionSelect)="selectedShared()">
-          Shared
-        </ion-segment-button>
-        <ion-segment-button [disabled]=!isSharedEnabled value="personal+shared" style="font-size:1.2em; line-height: 1.2em; height:4em;  color: #43c8bb; border-width:0px 0px 2px 0px;" (ionSelect)="selectedBoth()">
-          Personal<br/>+<br/>Shared
-        </ion-segment-button>
-      </ion-segment>
+  <ion-card> 
+
+      <div style="margin-top:1em; margin-bottom:-1em; text-align: center; ">
+        <div style="display:inline">
+          <ion-label style="display:inline; font-size: 1.5em;">Personal</ion-label>
+          <ion-checkbox [(ngModel)]="personal" (ionChange)=selectionUpdate()></ion-checkbox>
+        </div>
+        <div style="display:inline; margin-left:3.5em">
+          <ion-label style="display:inline; font-size: 1.5em;">Shared</ion-label>
+          <ion-checkbox [(ngModel)]="shared" (ionChange)=selectionUpdate()></ion-checkbox>  
+        </div>
+      </div>
 
       <ion-card-content>
           <canvas #doughnutCanvas width=250% height=250%></canvas>
